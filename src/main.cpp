@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "Game.h"
 
 int main(void)
 {
@@ -7,19 +8,24 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "CrypticPlants Demo");
 
-    SetTargetFPS(60);              
+    SetTargetFPS(60);    
+    
+    Game game;
 
-    while (!WindowShouldClose())    
-    {
+    while (!WindowShouldClose())    {
+        game.Update();
 
         BeginDrawing();
 
         ClearBackground(LIGHTGRAY);
 
+        game.Draw();
+
 
         EndDrawing();
         
     }
+    game.Unload();
 
     CloseWindow();        
 
