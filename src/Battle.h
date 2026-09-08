@@ -17,6 +17,7 @@ class Battle{
     Battle();
 
     void StartTestEncounter();
+    void Update();
     void Draw();
     void Unload();
 

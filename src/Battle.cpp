@@ -11,11 +11,22 @@ void Battle::LoadMonsterData(){
 }
 
 void Battle::StartTestEncounter(){
+    if(currentMonster != nullptr){
+        currentMonster->Unload();
+        delete currentMonster;
+        currentMonster = nullptr;
+    }
     int randomIndex = GetRandomValue(0, static_cast<int>(monsterData.size()) -1);
 
 
     MonsterData& data = monsterData[randomIndex];
     currentMonster = new Monster(data.name, data.range, data.speed, data.health, data.resistance, data.attack, data.frontSpritePath, data.backSpritePath);
+}
+
+void Battle::Update(){
+    if(IsKeyPressed(KEY_ENTER)){
+        StartTestEncounter();
+    }
 }
 
 void Battle::Draw(){

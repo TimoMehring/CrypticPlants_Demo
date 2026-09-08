@@ -4,7 +4,7 @@ Game::Game(){
 }
 
 void Game::Update(){
-
+    battle.Update();
 }
 
 void Game::Draw(){
