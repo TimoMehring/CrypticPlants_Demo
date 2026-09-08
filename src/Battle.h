@@ -2,16 +2,22 @@
 #include "raylib.h"
 #include "Monster.h"
 #include <vector>
+#include <optional>
 
 class Battle{
     private:
 
-    std::vector<Monster> monsters;
+    std::vector<MonsterData> monsterData;
+    Monster* currentMonster = nullptr;
 
-    void LoadMonsters();
+    void LoadMonsterData();
 
     public:
     // Constructor
     Battle();
+
+    void StartTestEncounter();
+    void Draw();
+    void Unload();
 
 };
