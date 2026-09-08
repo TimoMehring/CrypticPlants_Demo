@@ -17,9 +17,9 @@ void Monster::DrawFront(Vector2 position, float scale){
     DrawTextureEx(this->frontSprite, position, 0.0f, scale, WHITE);
 }
 
-void Monster::DrawBack(Vector2 position, float scale){
+/* void Monster::DrawBack(Vector2 position, float scale){
     DrawTextureEx(this->backSprite, position, 0.0f, scale, WHITE);
-}
+} */
 
 void Monster::Unload(){
     UnloadTexture(this->frontSprite);

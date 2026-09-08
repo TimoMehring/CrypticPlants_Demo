@@ -35,7 +35,7 @@ class Monster{
 
     // Drawing
     void DrawFront(Vector2 position, float scale);
-    void DrawBack(Vector2 position, float scale);
+    //void DrawBack(Vector2 position, float scale);
 
     void Unload();
 };

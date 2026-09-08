@@ -31,7 +31,7 @@ void Battle::Update(){
 
 void Battle::Draw(){
         currentMonster->DrawFront({300.0f, 20.0f}, 4.0f);
-        currentMonster->DrawBack({300.0f, 300.0f}, 4.0f);
+        //currentMonster->DrawBack({300.0f, 300.0f}, 4.0f);
 }
 
 void Battle::Unload(){

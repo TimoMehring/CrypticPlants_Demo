@@ -4,6 +4,13 @@
 #include <vector>
 #include <optional>
 
+enum class BattleState{
+    ChooseWeapon,
+    DetermineFirstAttacker,
+    ChooseAttack,
+    AttackSequences
+};
+
 class Battle{
     private:
 
