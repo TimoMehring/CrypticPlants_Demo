@@ -1,15 +1,15 @@
 #include "BattleUI.h"
 
 BattleUI::BattleUI(){
-    this->selectedWeapon = WeaponSelection::Boommerang;
+    this->selectedWeapon = WeaponSelection::None;
     this->currentFrame = 0;
     this->frameTimer = 0.0f;
 
     this->noWeaponSelectedYet = LoadTexture("assets/BattleUI/choose_weapon_base.png");
-
     this->pistolSelectedAnimation = LoadTexture("assets/BattleUI/choose_weapon_pistol_spritesheet.png");
-
     this->boomerangSelectedAnimation = LoadTexture("assets/BattleUI/choose_weapon_boomerang_spritesheet.png");
+    this->chooseAttack = LoadTexture("assets/BattleUI/choose_attack.png");
+    this->returnArrow = LoadTexture("assets/BattleUI/return.png");
 }
 
 void BattleUI::UpdateWeaponSelection(){
@@ -17,25 +17,70 @@ void BattleUI::UpdateWeaponSelection(){
     float halfWidth = static_cast<float>(noWeaponSelectedYet.width) / 2.0f;
     Rectangle clickPistol = {50.0f, 600.0f, halfWidth*scale, static_cast<float>(noWeaponSelectedYet.height)*scale};
     Rectangle clickBoomerang = {50.0f + halfWidth*scale, 600.0f, halfWidth*scale, static_cast<float>(noWeaponSelectedYet.height)*scale};
-    if(this->selectedWeapon == WeaponSelection::Pistol || this->selectedWeapon == WeaponSelection::Boommerang){
-        this->frameTimer += GetFrameTime();
-
-        if(this->frameTimer >= 0.4f){
-            this->currentFrame++;
-            if(this->currentFrame >= 2){
-                this->currentFrame = 0;
-            }
-            this->frameTimer = 0.0f;
-        }
-    }
 
     Vector2 mousePosition = GetMousePosition();
-    if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-        if(CheckCollisionPointRec(mousePosition,clickPistol)){
-            this->selectedWeapon = WeaponSelection::Pistol;
+
+    switch(this->selectedWeapon){
+        case WeaponSelection::None:{
+            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                if(CheckCollisionPointRec(mousePosition,clickPistol)){
+                    this->selectedWeapon = WeaponSelection::Pistol;
+                }
+                else if(CheckCollisionPointRec(mousePosition,clickBoomerang)){
+                    this->selectedWeapon = WeaponSelection::Boommerang;
+                    this->currentFrame = 0;
+                    this->frameTimer = 0;
+                }
+            
+            }
+            break;
         }
-        else if(CheckCollisionPointRec(mousePosition,clickBoomerang)){
-            this->selectedWeapon = WeaponSelection::Boommerang;
+        case WeaponSelection::Pistol:{
+            this->frameTimer += GetFrameTime();
+            
+            if(this->frameTimer >= 0.4f){
+                this->currentFrame++;
+                if(this->currentFrame >= 2){
+                    this->currentFrame = 0;
+            }
+            this->frameTimer = 0.0f;
+            }
+            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                if(CheckCollisionPointRec(mousePosition,clickPistol)){
+                    this->selectedWeapon = WeaponSelection::ChooseAttack;
+                }
+                else if(CheckCollisionPointRec(mousePosition,clickBoomerang)){
+                    this->selectedWeapon = WeaponSelection::Boommerang;
+                    this->currentFrame = 0;
+                    this->frameTimer = 0;
+                }
+            }
+            break;
+        }
+
+        case WeaponSelection::Boommerang:{
+            this->frameTimer += GetFrameTime();
+            
+            if(this->frameTimer >= 0.4f){
+                this->currentFrame++;
+                if(this->currentFrame >= 2){
+                    this->currentFrame = 0;
+            }
+            this->frameTimer = 0.0f;
+            }
+            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                if(CheckCollisionPointRec(mousePosition,clickBoomerang)){
+                    this->selectedWeapon = WeaponSelection::ChooseAttack;
+                }
+                else if(CheckCollisionPointRec(mousePosition,clickPistol)){
+                    this->selectedWeapon = WeaponSelection::Pistol;
+                }
+            }
+            break;
+        }
+
+        case WeaponSelection::ChooseAttack:{
+
         }
     }
 }
@@ -64,6 +109,11 @@ void BattleUI::DrawWeaponSelection(){
             DrawTexturePro(boomerangSelectedAnimation, source, destination, {0.0f, 0.0f}, 0.0f, WHITE);
         }
             break;
+        
+        case WeaponSelection::ChooseAttack:{
+            DrawTextureEx(this->chooseAttack, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+            break;
+        }
 
     }
 }

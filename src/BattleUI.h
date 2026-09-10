@@ -4,7 +4,8 @@
 enum class WeaponSelection{
     None,
     Pistol,
-    Boommerang
+    Boommerang,
+    ChooseAttack
 };
 
 class BattleUI{
@@ -12,6 +13,8 @@ class BattleUI{
     Texture2D noWeaponSelectedYet;
     Texture2D pistolSelectedAnimation;
     Texture2D boomerangSelectedAnimation;
+    Texture2D chooseAttack;
+    Texture2D returnArrow;
 
     WeaponSelection selectedWeapon;
 
