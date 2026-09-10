@@ -13,6 +13,10 @@ BattleUI::BattleUI(){
 }
 
 void BattleUI::UpdateWeaponSelection(){
+    float scale = 5.0f;
+    float halfWidth = static_cast<float>(noWeaponSelectedYet.width) / 2.0f;
+    Rectangle clickPistol = {50.0f, 600.0f, halfWidth*scale, static_cast<float>(noWeaponSelectedYet.height)*scale};
+    Rectangle clickBoomerang = {50.0f + halfWidth*scale, 600.0f, halfWidth*scale, static_cast<float>(noWeaponSelectedYet.height)*scale};
     if(this->selectedWeapon == WeaponSelection::Pistol || this->selectedWeapon == WeaponSelection::Boommerang){
         this->frameTimer += GetFrameTime();
 
@@ -22,6 +26,16 @@ void BattleUI::UpdateWeaponSelection(){
                 this->currentFrame = 0;
             }
             this->frameTimer = 0.0f;
+        }
+    }
+
+    Vector2 mousePosition = GetMousePosition();
+    if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+        if(CheckCollisionPointRec(mousePosition,clickPistol)){
+            this->selectedWeapon = WeaponSelection::Pistol;
+        }
+        else if(CheckCollisionPointRec(mousePosition,clickBoomerang)){
+            this->selectedWeapon = WeaponSelection::Boommerang;
         }
     }
 }
