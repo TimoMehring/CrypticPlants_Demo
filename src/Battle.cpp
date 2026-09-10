@@ -24,6 +24,7 @@ void Battle::StartTestEncounter(){
 }
 
 void Battle::Update(){
+    battleUI.UpdateWeaponSelection();
     if(IsKeyPressed(KEY_ENTER)){
         StartTestEncounter();
     }
