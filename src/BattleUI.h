@@ -4,11 +4,12 @@
 enum class WeaponSelection{
     None,
     Pistol,
-    Bommerang
+    Boommerang
 };
 
 class BattleUI{
     private:
+    Texture2D noWeaponSelectedYet;
     Texture2D pistolSelectedAnimation;
     Texture2D boomerangSelectedAnimation;
 
@@ -22,5 +23,7 @@ class BattleUI{
 
     void UpdateWeaponSelection();
     void DrawWeaponSelection();
+
+    void Unload();
 
 };

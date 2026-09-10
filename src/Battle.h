@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "Monster.h"
+#include "BattleUI.h"
 #include <vector>
 #include <optional>
 
@@ -13,6 +14,7 @@ enum class BattleState{
 
 class Battle{
     private:
+    BattleUI battleUI;
 
     std::vector<MonsterData> monsterData;
     Monster* currentMonster = nullptr;
@@ -20,7 +22,6 @@ class Battle{
     void LoadMonsterData();
 
     public:
-    // Constructor
     Battle();
 
     void StartTestEncounter();

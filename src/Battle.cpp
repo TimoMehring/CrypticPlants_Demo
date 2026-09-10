@@ -30,15 +30,19 @@ void Battle::Update(){
 }
 
 void Battle::Draw(){
+    battleUI.DrawWeaponSelection();
+    if(currentMonster != nullptr){
         currentMonster->DrawFront({300.0f, 20.0f}, 4.0f);
-        //currentMonster->DrawBack({300.0f, 300.0f}, 4.0f);
+    }
+    //currentMonster->DrawBack({300.0f, 300.0f}, 4.0f);
 }
 
 void Battle::Unload(){
-        if(currentMonster != nullptr){
-            currentMonster->Unload();
-            delete currentMonster;
-            currentMonster = nullptr;
+    battleUI.Unload();
+    if(currentMonster != nullptr){
+        currentMonster->Unload();
+        delete currentMonster;
+        currentMonster = nullptr;
         }
    
 }

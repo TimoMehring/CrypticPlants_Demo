@@ -30,7 +30,6 @@ class Monster{
     float attack;
 
     public:
-    // Constructor
     Monster(const std::string& name, float range, float speed, float health, float resistance, float attack, const char* frontSpritePath, const char* backSpritePath);
 
     // Drawing
