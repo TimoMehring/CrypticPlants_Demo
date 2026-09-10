@@ -10,6 +10,7 @@ BattleUI::BattleUI(){
     this->boomerangSelectedAnimation = LoadTexture("assets/BattleUI/choose_weapon_boomerang_spritesheet.png");
     this->chooseAttack = LoadTexture("assets/BattleUI/choose_attack.png");
     this->returnArrow = LoadTexture("assets/BattleUI/return.png");
+    this->returnBorder = LoadTexture("assets/BattleUI/return_border.png");
 }
 
 void BattleUI::UpdateWeaponSelection(){
@@ -112,6 +113,13 @@ void BattleUI::DrawWeaponSelection(){
         
         case WeaponSelection::ChooseAttack:{
             DrawTextureEx(this->chooseAttack, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+            DrawTextureEx(this->returnArrow, {50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
+
+            Vector2 mousePosition = GetMousePosition();
+            Rectangle returnArrowRec = {50.0f, 550.0f,static_cast<float>(this->returnArrow.width) * scale, static_cast<float>(this->returnArrow.height) * scale};
+            if(CheckCollisionPointRec(mousePosition, returnArrowRec)){
+                DrawTextureEx(this->returnBorder,{50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
+            }
             break;
         }
 
@@ -122,4 +130,9 @@ void BattleUI::Unload(){
     UnloadTexture(this->noWeaponSelectedYet);
     UnloadTexture(this->pistolSelectedAnimation);
     UnloadTexture(this->boomerangSelectedAnimation);
+
+    UnloadTexture(this->chooseAttack);
+    UnloadTexture(this->returnArrow);
+    UnloadTexture(this->returnBorder);
+
 }
