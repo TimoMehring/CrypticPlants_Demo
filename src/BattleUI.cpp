@@ -81,7 +81,10 @@ void BattleUI::UpdateWeaponSelection(){
         }
 
         case WeaponSelection::ChooseAttack:{
-
+            Rectangle returnArrowRec = {50.0f, 550.0f,static_cast<float>(this->returnArrow.width) * scale, static_cast<float>(this->returnArrow.height) * scale};
+            if((CheckCollisionPointRec(mousePosition, returnArrowRec)) && (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))){
+                this->selectedWeapon = WeaponSelection::None;
+            }
         }
     }
 }
