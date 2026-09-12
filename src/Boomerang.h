@@ -24,6 +24,8 @@ class Boomerang{
 
     std::vector<BoomerangAbility> abilities;
 
+    void LoadAbilities();
+
     public:
     Boomerang();
 

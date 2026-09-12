@@ -21,6 +21,8 @@ class Pistol{
 
     std::vector<PistolAbility> abilities;
 
+    void LoadAbilities();
+
     public:
     Pistol();
 
