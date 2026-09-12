@@ -1,11 +1,14 @@
 #pragma once
 #include "raylib.h"
+#include "Pistol.h"
+#include "Boomerang.h"
 
 enum class WeaponSelection{
     None,
     Pistol,
     Boommerang,
-    ChooseAttack
+    ChooseAttackPistol,
+    ChooseAttackBoomerang
 };
 
 class BattleUI{
@@ -22,11 +25,17 @@ class BattleUI{
     int currentFrame;
     float frameTimer;
 
+    Texture2D pistolAbilityIcons[3];
+
     public:
     BattleUI();
 
     void UpdateWeaponSelection();
     void DrawWeaponSelection();
+
+    void LoadPistolAbilityIcons(const std::vector<PistolAbility>& abilities);
+    void DrawPistolAbilities();
+    void DrawBoomerangAbilities();
 
     void Unload();
 

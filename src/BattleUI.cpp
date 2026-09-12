@@ -48,7 +48,7 @@ void BattleUI::UpdateWeaponSelection(){
             }
             if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
                 if(CheckCollisionPointRec(mousePosition,clickPistol)){
-                    this->selectedWeapon = WeaponSelection::ChooseAttack;
+                    this->selectedWeapon = WeaponSelection::ChooseAttackPistol;
                 }
                 else if(CheckCollisionPointRec(mousePosition,clickBoomerang)){
                     this->selectedWeapon = WeaponSelection::Boommerang;
@@ -71,21 +71,25 @@ void BattleUI::UpdateWeaponSelection(){
             }
             if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
                 if(CheckCollisionPointRec(mousePosition,clickBoomerang)){
-                    this->selectedWeapon = WeaponSelection::ChooseAttack;
+                    this->selectedWeapon = WeaponSelection::ChooseAttackBoomerang;
                 }
                 else if(CheckCollisionPointRec(mousePosition,clickPistol)){
                     this->selectedWeapon = WeaponSelection::Pistol;
+                    this->currentFrame = 0;
+                    this->frameTimer = 0;
                 }
             }
             break;
         }
 
-        case WeaponSelection::ChooseAttack:{
+        case WeaponSelection::ChooseAttackPistol:
+        case WeaponSelection::ChooseAttackBoomerang:{
             Rectangle returnArrowRec = {50.0f, 550.0f,static_cast<float>(this->returnArrow.width) * scale, static_cast<float>(this->returnArrow.height) * scale};
             if((CheckCollisionPointRec(mousePosition, returnArrowRec)) && (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))){
                 this->selectedWeapon = WeaponSelection::None;
             }
         }
+        break;
     }
 }
 
@@ -114,7 +118,8 @@ void BattleUI::DrawWeaponSelection(){
         }
             break;
         
-        case WeaponSelection::ChooseAttack:{
+        case WeaponSelection::ChooseAttackPistol:
+        case WeaponSelection::ChooseAttackBoomerang:{
             DrawTextureEx(this->chooseAttack, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
             DrawTextureEx(this->returnArrow, {50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
 
@@ -129,6 +134,23 @@ void BattleUI::DrawWeaponSelection(){
     }
 }
 
+void BattleUI::LoadPistolAbilityIcons(const std::vector<PistolAbility>& abilities){
+    if(abilities.size() < 3){
+        return;
+    }
+    this->pistolAbilityIcons[0] = LoadTexture(abilities[0].iconPath);
+    this->pistolAbilityIcons[1] = LoadTexture(abilities[1].iconPath);
+    this->pistolAbilityIcons[2] = LoadTexture(abilities[2].iconPath);
+}
+
+void BattleUI::DrawPistolAbilities(){
+    if(selectedWeapon == WeaponSelection::ChooseAttackPistol){
+    DrawTextureEx(this->pistolAbilityIcons[0],{100.0f, 620.0f},0.0f,5.0f,WHITE);
+    DrawTextureEx(this->pistolAbilityIcons[1],{300.0f, 620.0f},0.0f,5.0f,WHITE);
+    DrawTextureEx(this->pistolAbilityIcons[2],{500.0f, 620.0f},0.0f,5.0f,WHITE);
+    }
+}
+
 void BattleUI::Unload(){
     UnloadTexture(this->noWeaponSelectedYet);
     UnloadTexture(this->pistolSelectedAnimation);
@@ -137,5 +159,9 @@ void BattleUI::Unload(){
     UnloadTexture(this->chooseAttack);
     UnloadTexture(this->returnArrow);
     UnloadTexture(this->returnBorder);
+
+    UnloadTexture(this->pistolAbilityIcons[0]);
+    UnloadTexture(this->pistolAbilityIcons[1]);
+    UnloadTexture(this->pistolAbilityIcons[2]);
 
 }
