@@ -5,6 +5,8 @@ Boomerang::Boomerang(){
     this->speed = 75.0f;
     this->energy = 100.0f;
     this->attack = 100.0f;
+
+    LoadAbilities();
 }
 
 void Boomerang::LoadAbilities(){

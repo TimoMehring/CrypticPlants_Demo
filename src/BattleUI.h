@@ -27,6 +27,7 @@ class BattleUI{
     float frameTimer;
 
     Texture2D pistolAbilityIcons[3];
+    Texture2D boomerangAbilityIcons[3];
 
     public:
     BattleUI();
@@ -35,6 +36,7 @@ class BattleUI{
     void DrawWeaponSelection();
 
     void LoadPistolAbilityIcons(const std::vector<PistolAbility>& abilities);
+    void LoadBoomerangAbilityIcons(const std::vector<BoomerangAbility>& abilities);
     void DrawPistolAbilities();
     void DrawBoomerangAbilities();
 

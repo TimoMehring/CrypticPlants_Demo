@@ -166,17 +166,55 @@ void BattleUI::DrawPistolAbilities(){
     }
 }
 
+void BattleUI::LoadBoomerangAbilityIcons(const std::vector<BoomerangAbility>& abilities){
+    if(abilities.size() < 3){
+        return;
+    }
+    this->boomerangAbilityIcons[0] = LoadTexture(abilities[0].iconPath);
+    this->boomerangAbilityIcons[1] = LoadTexture(abilities[1].iconPath);
+    this->boomerangAbilityIcons[2] = LoadTexture(abilities[2].iconPath);
+
+}
+
+void BattleUI::DrawBoomerangAbilities(){
+    if(selectedWeapon == WeaponSelection::ChooseAttackBoomerang){
+    float scale = 5.0f;
+    DrawTextureEx(this->boomerangAbilityIcons[0],{70.0f, 610.0f},0.0f,5.0f,WHITE);
+    DrawTextureEx(this->boomerangAbilityIcons[1],{230.0f, 610.0f},0.0f,5.0f,WHITE);
+    DrawTextureEx(this->boomerangAbilityIcons[2],{390.0f, 610.0f},0.0f,5.0f,WHITE);
+
+    Rectangle Icon1 = {70.0f, 610.0f, static_cast<float>(this->boomerangAbilityIcons[0].width)*scale, static_cast<float>(this->boomerangAbilityIcons[0].height)*scale};
+    Rectangle Icon2 = {230.0f, 610.0f, static_cast<float>(this->boomerangAbilityIcons[1].width)*scale, static_cast<float>(this->boomerangAbilityIcons[1].height)*scale};
+    Rectangle Icon3 = {390.0f, 610.0f, static_cast<float>(this->boomerangAbilityIcons[2].width)*scale, static_cast<float>(this->boomerangAbilityIcons[2].height)*scale};
+    
+    Vector2 mousePosition = GetMousePosition();
+    if(CheckCollisionPointRec(mousePosition, Icon1)){
+        DrawTextureEx(chooseAttackBorder, {70.0f, 610.0f}, 0.0f, 5.0f, WHITE);
+    }
+    if(CheckCollisionPointRec(mousePosition, Icon2)){
+        DrawTextureEx(chooseAttackBorder, {230.0f, 610.0f}, 0.0f, 5.0f, WHITE);
+    }
+    if(CheckCollisionPointRec(mousePosition, Icon3)){
+        DrawTextureEx(chooseAttackBorder, {390.0f, 610.0f}, 0.0f, 5.0f, WHITE);
+    }
+    }
+}
+
 void BattleUI::Unload(){
     UnloadTexture(this->noWeaponSelectedYet);
     UnloadTexture(this->pistolSelectedAnimation);
     UnloadTexture(this->boomerangSelectedAnimation);
 
     UnloadTexture(this->chooseAttack);
+    UnloadTexture(this->chooseAttackBorder);
     UnloadTexture(this->returnArrow);
     UnloadTexture(this->returnBorder);
 
     UnloadTexture(this->pistolAbilityIcons[0]);
     UnloadTexture(this->pistolAbilityIcons[1]);
     UnloadTexture(this->pistolAbilityIcons[2]);
+    UnloadTexture(this->boomerangAbilityIcons[0]);
+    UnloadTexture(this->boomerangAbilityIcons[1]);
+    UnloadTexture(this->boomerangAbilityIcons[2]);
 
 }

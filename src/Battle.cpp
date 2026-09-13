@@ -5,6 +5,7 @@ Battle::Battle(){
     StartTestEncounter();
 
     battleUI.LoadPistolAbilityIcons(this->pistol.GetAbilities());
+    battleUI.LoadBoomerangAbilityIcons(this->boomerang.GetAbilities());
 }
 
 void Battle::LoadMonsterData(){
@@ -35,6 +36,7 @@ void Battle::Update(){
 void Battle::Draw(){
     battleUI.DrawWeaponSelection();
     battleUI.DrawPistolAbilities();
+    battleUI.DrawBoomerangAbilities();
     if(currentMonster != nullptr){
         currentMonster->DrawFront({300.0f, 20.0f}, 4.0f);
     }
