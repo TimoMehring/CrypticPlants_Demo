@@ -9,6 +9,7 @@ BattleUI::BattleUI(){
     this->pistolSelectedAnimation = LoadTexture("assets/BattleUI/choose_weapon_pistol_spritesheet.png");
     this->boomerangSelectedAnimation = LoadTexture("assets/BattleUI/choose_weapon_boomerang_spritesheet.png");
     this->chooseAttack = LoadTexture("assets/BattleUI/choose_attack.png");
+    this->chooseAttackBorder = LoadTexture("assets/BattleUI/choose_attack_border.png");
     this->returnArrow = LoadTexture("assets/BattleUI/return.png");
     this->returnBorder = LoadTexture("assets/BattleUI/return_border.png");
 }
@@ -145,9 +146,23 @@ void BattleUI::LoadPistolAbilityIcons(const std::vector<PistolAbility>& abilitie
 
 void BattleUI::DrawPistolAbilities(){
     if(selectedWeapon == WeaponSelection::ChooseAttackPistol){
-    DrawTextureEx(this->pistolAbilityIcons[0],{100.0f, 620.0f},0.0f,5.0f,WHITE);
-    DrawTextureEx(this->pistolAbilityIcons[1],{300.0f, 620.0f},0.0f,5.0f,WHITE);
-    DrawTextureEx(this->pistolAbilityIcons[2],{500.0f, 620.0f},0.0f,5.0f,WHITE);
+    float scale = 5.0f;
+    DrawTextureEx(this->pistolAbilityIcons[0],{70.0f, 610.0f},0.0f,5.0f,WHITE);
+    DrawTextureEx(this->pistolAbilityIcons[1],{230.0f, 610.0f},0.0f,5.0f,WHITE);
+    DrawTextureEx(this->pistolAbilityIcons[2],{390.0f, 610.0f},0.0f,5.0f,WHITE);
+    Rectangle Icon1 = {70.0f, 610.0f, static_cast<float>(this->pistolAbilityIcons[0].width)*scale, static_cast<float>(this->pistolAbilityIcons[0].height)*scale};
+    Rectangle Icon2 = {230.0f, 610.0f, static_cast<float>(this->pistolAbilityIcons[1].width)*scale, static_cast<float>(this->pistolAbilityIcons[1].height)*scale};
+    Rectangle Icon3 = {390.0f, 610.0f, static_cast<float>(this->pistolAbilityIcons[2].width)*scale, static_cast<float>(this->pistolAbilityIcons[2].height)*scale};
+    Vector2 mousePosition = GetMousePosition();
+    if(CheckCollisionPointRec(mousePosition, Icon1)){
+        DrawTextureEx(chooseAttackBorder, {70.0f, 610.0f}, 0.0f, 5.0f, WHITE);
+    }
+    if(CheckCollisionPointRec(mousePosition, Icon2)){
+        DrawTextureEx(chooseAttackBorder, {230.0f, 610.0f}, 0.0f, 5.0f, WHITE);
+    }
+    if(CheckCollisionPointRec(mousePosition, Icon3)){
+        DrawTextureEx(chooseAttackBorder, {390.0f, 610.0f}, 0.0f, 5.0f, WHITE);
+    }
     }
 }
 

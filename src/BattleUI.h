@@ -17,6 +17,7 @@ class BattleUI{
     Texture2D pistolSelectedAnimation;
     Texture2D boomerangSelectedAnimation;
     Texture2D chooseAttack;
+    Texture2D chooseAttackBorder;
     Texture2D returnArrow;
     Texture2D returnBorder;
 
