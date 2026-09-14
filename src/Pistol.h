@@ -6,6 +6,7 @@ struct PistolAbility
 {
     std::string name;
     const char* iconPath;
+    std::string description;
 
     // sample ideas
     float damageBonus;

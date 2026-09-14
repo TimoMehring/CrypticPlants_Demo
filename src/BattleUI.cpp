@@ -10,6 +10,7 @@ BattleUI::BattleUI(){
     this->boomerangSelectedAnimation = LoadTexture("assets/BattleUI/choose_weapon_boomerang_spritesheet.png");
     this->chooseAttack = LoadTexture("assets/BattleUI/choose_attack.png");
     this->chooseAttackBorder = LoadTexture("assets/BattleUI/choose_attack_border.png");
+    this->abilityTextField = LoadTexture("assets/BattleUI/ability_text_field.png");
     this->returnArrow = LoadTexture("assets/BattleUI/return.png");
     this->returnBorder = LoadTexture("assets/BattleUI/return_border.png");
 }
@@ -99,6 +100,8 @@ void BattleUI::DrawWeaponSelection(){
     float frameHeight = 33.0f;
     float scale = 5.0f;
 
+    DrawTextureEx(this->abilityTextField, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+
     switch(this->selectedWeapon){
         case WeaponSelection::None:{
             DrawTextureEx(this->noWeaponSelectedYet, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
@@ -144,7 +147,7 @@ void BattleUI::LoadPistolAbilityIcons(const std::vector<PistolAbility>& abilitie
     this->pistolAbilityIcons[2] = LoadTexture(abilities[2].iconPath);
 }
 
-void BattleUI::DrawPistolAbilities(){
+void BattleUI::DrawPistolAbilities(const std::vector<PistolAbility>& abilities){
     if(selectedWeapon == WeaponSelection::ChooseAttackPistol){
     float scale = 5.0f;
     DrawTextureEx(this->pistolAbilityIcons[0],{70.0f, 610.0f},0.0f,5.0f,WHITE);
@@ -156,12 +159,15 @@ void BattleUI::DrawPistolAbilities(){
     Vector2 mousePosition = GetMousePosition();
     if(CheckCollisionPointRec(mousePosition, Icon1)){
         DrawTextureEx(chooseAttackBorder, {70.0f, 610.0f}, 0.0f, 5.0f, WHITE);
+        DrawText(abilities[0].description.c_str(), 600, 650, 15.0f, BLACK);
     }
     if(CheckCollisionPointRec(mousePosition, Icon2)){
         DrawTextureEx(chooseAttackBorder, {230.0f, 610.0f}, 0.0f, 5.0f, WHITE);
+        DrawText(abilities[1].description.c_str(), 600, 650, 15.0f, BLACK);
     }
     if(CheckCollisionPointRec(mousePosition, Icon3)){
         DrawTextureEx(chooseAttackBorder, {390.0f, 610.0f}, 0.0f, 5.0f, WHITE);
+        DrawText(abilities[2].description.c_str(), 600, 650, 15.0f, BLACK);
     }
     }
 }

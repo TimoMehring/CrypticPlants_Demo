@@ -28,6 +28,7 @@ class BattleUI{
 
     Texture2D pistolAbilityIcons[3];
     Texture2D boomerangAbilityIcons[3];
+    Texture2D abilityTextField;
 
     public:
     BattleUI();
@@ -37,7 +38,7 @@ class BattleUI{
 
     void LoadPistolAbilityIcons(const std::vector<PistolAbility>& abilities);
     void LoadBoomerangAbilityIcons(const std::vector<BoomerangAbility>& abilities);
-    void DrawPistolAbilities();
+    void DrawPistolAbilities(const std::vector<PistolAbility>& abilities);
     void DrawBoomerangAbilities();
 
     void Unload();
