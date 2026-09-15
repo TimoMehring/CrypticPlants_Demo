@@ -28,6 +28,8 @@ class BattleUI{
     int currentFrame;
     float frameTimer;
 
+    int abilityClicked;
+
     Texture2D pistolAbilityIcons[3];
     Texture2D boomerangAbilityIcons[3];
     Texture2D abilityTextField;

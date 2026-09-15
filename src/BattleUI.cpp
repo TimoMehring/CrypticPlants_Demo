@@ -105,13 +105,31 @@ void BattleUI::UpdateWeaponSelection(){
             Vector2 mousePosition = GetMousePosition();
             if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
                 if(CheckCollisionPointRec(mousePosition, Icon1)){
-                    this->selectedWeapon = WeaponSelection::ChooseTargetPistol;
+                    this->abilityClicked = 0;
+                    if(selectedWeapon == WeaponSelection::ChooseAttackPistol){
+                        this->selectedWeapon = WeaponSelection::ChooseTargetPistol;
+                    }
+                    else{
+                        this->selectedWeapon = WeaponSelection::ChooseTargetBoomerang;
+                    }
                 }
                 else if(CheckCollisionPointRec(mousePosition, Icon2)){
-                    this->selectedWeapon = WeaponSelection::ChooseTargetPistol;
+                    this->abilityClicked = 1;
+                    if(selectedWeapon == WeaponSelection::ChooseAttackPistol){
+                        this->selectedWeapon = WeaponSelection::ChooseTargetPistol;
+                    }
+                    else{
+                        this->selectedWeapon = WeaponSelection::ChooseTargetBoomerang;
+                    }
                 }
                 else if(CheckCollisionPointRec(mousePosition, Icon3)){
-                    this->selectedWeapon = WeaponSelection::ChooseTargetPistol;
+                    this->abilityClicked = 2;
+                    if(selectedWeapon == WeaponSelection::ChooseAttackPistol){
+                        this->selectedWeapon = WeaponSelection::ChooseTargetPistol;
+                    }
+                    else{
+                        this->selectedWeapon = WeaponSelection::ChooseTargetBoomerang;
+                    }
                 }
             }
         }
@@ -284,9 +302,10 @@ void BattleUI::DrawMonsterUI(){
 
 void BattleUI::DrawChooseTarget(){
     if(selectedWeapon == WeaponSelection::ChooseTargetPistol || selectedWeapon == WeaponSelection::ChooseTargetBoomerang){
-        DrawTextureEx(this->arrowLeft, {440.0f, 420.0f}, 0.0f, 6.0f, WHITE);
-        DrawTextureEx(this->middleFight, {515.0f, 420.0f}, 0.0f, 6.0f, WHITE);
-        DrawTextureEx(this->arrowRight, {590.0f, 420.0f}, 0.0f, 6.0f, WHITE);
+        DrawTextureEx(this->middleFight, {510.0f, 420.0f}, 0.0f, 8.0f, WHITE);
+        DrawTextureEx(this->arrowLeft, {440.0f, 420.0f}, 0.0f, 8.0f, WHITE);
+        //DrawTextureEx(this->middleFight, {510.0f, 420.0f}, 0.0f, 6.0f, WHITE);
+        DrawTextureEx(this->arrowRight, {580.0f, 420.0f}, 0.0f, 8.0f, WHITE);
     }
 }
 
