@@ -104,11 +104,12 @@ void BattleUI::DrawWeaponSelection(){
     float frameHeight = 33.0f;
     float scale = 5.0f;
 
-    DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+    //DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
 
     switch(this->selectedWeapon){
         case WeaponSelection::None:{
             DrawTextureEx(this->noWeaponSelectedYet, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+            DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         }
             break;
         
@@ -116,6 +117,7 @@ void BattleUI::DrawWeaponSelection(){
             Rectangle source = {this->currentFrame * frameWidth, 0.0f, frameWidth, frameHeight};
             Rectangle destination = {50.0f, 600.0f, frameWidth * scale, frameHeight * scale};
             DrawTexturePro(this->pistolSelectedAnimation, source, destination, {0.0f, 0.0f}, 0.0f, WHITE);
+            DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         }
             break;
 
@@ -123,6 +125,7 @@ void BattleUI::DrawWeaponSelection(){
             Rectangle source = {this->currentFrame * frameWidth, 0.0f, frameWidth, frameHeight};
             Rectangle destination = {50.0f, 600.0f, frameWidth * scale, frameHeight * scale};
             DrawTexturePro(this->boomerangSelectedAnimation, source, destination, {0.0f, 0.0f}, 0.0f, WHITE);
+            DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         }
             break;
         
@@ -169,19 +172,22 @@ void BattleUI::DrawPistolAbilities(const std::vector<PistolAbility>& abilities){
         DrawTextEx(this->battleUIFont, abilities[0].description.c_str(), {560.0f, 660.0f}, 20.0f, 1.0f, BLACK);
         //DrawText(abilities[0].description.c_str(), 600, 650, 15.0f, BLACK);
     }
-    if(CheckCollisionPointRec(mousePosition, Icon2)){
+    else if(CheckCollisionPointRec(mousePosition, Icon2)){
         DrawTextureEx(chooseAttackBorder, {230.0f, 610.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->abilityTextField, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->abilityIcon, {560.0f, 620.0f}, 0.0f, 2.0f, WHITE);
         DrawTextEx(this->battleUIFont, abilities[1].name.c_str(), {610.0f, 620.0f}, 30.0f, 1.0f, BLACK);
         DrawTextEx(this->battleUIFont, abilities[1].description.c_str(), {560.0f, 660.0f}, 20.0f, 1.0f, BLACK);
     }
-    if(CheckCollisionPointRec(mousePosition, Icon3)){
+    else if(CheckCollisionPointRec(mousePosition, Icon3)){
         DrawTextureEx(chooseAttackBorder, {390.0f, 610.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->abilityTextField, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->abilityIcon, {560.0f, 620.0f}, 0.0f, 2.0f, WHITE);
         DrawTextEx(this->battleUIFont, abilities[2].name.c_str(), {610.0f, 620.0f}, 30.0f, 1.0f, BLACK);
         DrawTextEx(this->battleUIFont, abilities[2].description.c_str(), {560.0f, 660.0f}, 20.0f, 1.0f, BLACK);
+    }
+    else{
+        DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
     }
     }
 }
@@ -215,19 +221,22 @@ void BattleUI::DrawBoomerangAbilities(const std::vector<BoomerangAbility>& abili
         DrawTextEx(this->battleUIFont, abilities[0].name.c_str(), {610.0f, 620.0f}, 30.0f, 1.0f, BLACK);
         DrawTextEx(this->battleUIFont, abilities[0].description.c_str(), {560.0f, 660.0f}, 20.0f, 1.0f, BLACK);
     }
-    if(CheckCollisionPointRec(mousePosition, Icon2)){
+    else if(CheckCollisionPointRec(mousePosition, Icon2)){
         DrawTextureEx(chooseAttackBorder, {230.0f, 610.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->abilityTextField, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->abilityIcon, {560.0f, 620.0f}, 0.0f, 2.0f, WHITE);
         DrawTextEx(this->battleUIFont, abilities[1].name.c_str(), {610.0f, 620.0f}, 30.0f, 1.0f, BLACK);
         DrawTextEx(this->battleUIFont, abilities[1].description.c_str(), {560.0f, 660.0f}, 20.0f, 1.0f, BLACK);
     }
-    if(CheckCollisionPointRec(mousePosition, Icon3)){
+    else if(CheckCollisionPointRec(mousePosition, Icon3)){
         DrawTextureEx(chooseAttackBorder, {390.0f, 610.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->abilityTextField, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->abilityIcon, {560.0f, 620.0f}, 0.0f, 2.0f, WHITE);
         DrawTextEx(this->battleUIFont, abilities[2].name.c_str(), {610.0f, 620.0f}, 30.0f, 1.0f, BLACK);
         DrawTextEx(this->battleUIFont, abilities[2].description.c_str(), {560.0f, 660.0f}, 20.0f, 1.0f, BLACK);
+    }
+    else{
+        DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
     }
     }
 }
