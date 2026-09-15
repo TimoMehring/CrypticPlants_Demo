@@ -38,6 +38,8 @@ class BattleUI{
 
     Font battleUIFont;
 
+    Texture2D chooseTargetPistolUI;
+    Texture2D chooseTargetBoomerangUI;
     Texture2D monsterBattleBackground;
     Texture2D arrowLeft;
     Texture2D middleFight;

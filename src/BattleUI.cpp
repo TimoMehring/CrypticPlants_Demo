@@ -18,6 +18,8 @@ BattleUI::BattleUI(){
     this->returnArrow = LoadTexture("assets/BattleUI/return.png");
     this->returnBorder = LoadTexture("assets/BattleUI/return_border.png");
 
+    this->chooseTargetPistolUI = LoadTexture("assets/BattleUI/ui_choosetarget_pistol.png");
+    this->chooseTargetBoomerangUI = LoadTexture("assets/BattleUI/ui_choosetarget_boomerang.png");
     this->monsterBattleBackground = LoadTexture("assets/BattleUI/battle_monster_background.png");
     this->arrowLeft = LoadTexture("assets/BattleUI/arrow_left.png");
     this->middleFight = LoadTexture("assets/BattleUI/middle_fight.png");
@@ -301,11 +303,32 @@ void BattleUI::DrawMonsterUI(){
 }
 
 void BattleUI::DrawChooseTarget(){
-    if(selectedWeapon == WeaponSelection::ChooseTargetPistol || selectedWeapon == WeaponSelection::ChooseTargetBoomerang){
+    if(selectedWeapon == WeaponSelection::ChooseTargetPistol){
+        DrawTextureEx(this->chooseTargetPistolUI, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->middleFight, {510.0f, 420.0f}, 0.0f, 8.0f, WHITE);
         DrawTextureEx(this->arrowLeft, {440.0f, 420.0f}, 0.0f, 8.0f, WHITE);
-        //DrawTextureEx(this->middleFight, {510.0f, 420.0f}, 0.0f, 6.0f, WHITE);
         DrawTextureEx(this->arrowRight, {580.0f, 420.0f}, 0.0f, 8.0f, WHITE);
+        if(abilityClicked == 0){
+
+        }
+        else if(abilityClicked == 1){
+
+        }
+        else if(abilityClicked == 2){
+
+        }
+    }
+    else if(selectedWeapon == WeaponSelection::ChooseTargetBoomerang){
+        DrawTextureEx(this->chooseTargetBoomerangUI, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+        if(abilityClicked == 0){
+
+        }
+        else if(abilityClicked == 1){
+
+        }
+        else if(abilityClicked == 2){
+            
+        }
     }
 }
 
@@ -330,6 +353,8 @@ void BattleUI::Unload(){
     UnloadTexture(this->abilityIcon);
     UnloadTexture(this->abilityTextFieldNoText);
 
+    UnloadTexture(this->chooseTargetPistolUI);
+    UnloadTexture(this->chooseTargetBoomerangUI);
     UnloadTexture(this->monsterBattleBackground);
     UnloadTexture(this->arrowLeft);
     UnloadTexture(this->middleFight);
