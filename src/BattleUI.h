@@ -8,7 +8,9 @@ enum class WeaponSelection{
     Pistol,
     Boommerang,
     ChooseAttackPistol,
-    ChooseAttackBoomerang
+    ChooseAttackBoomerang,
+    ChooseTargetPistol,
+    ChooseTargetBoomerang
 };
 
 class BattleUI{
@@ -35,6 +37,9 @@ class BattleUI{
     Font battleUIFont;
 
     Texture2D monsterBattleBackground;
+    Texture2D arrowLeft;
+    Texture2D middleFight;
+    Texture2D arrowRight;
 
     public:
     BattleUI();
@@ -48,6 +53,7 @@ class BattleUI{
     void DrawBoomerangAbilities(const std::vector<BoomerangAbility>& abilities);
 
     void DrawMonsterUI();
+    void DrawChooseTarget();
 
     void Unload();
 

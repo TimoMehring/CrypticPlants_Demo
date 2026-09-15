@@ -19,6 +19,9 @@ BattleUI::BattleUI(){
     this->returnBorder = LoadTexture("assets/BattleUI/return_border.png");
 
     this->monsterBattleBackground = LoadTexture("assets/BattleUI/battle_monster_background.png");
+    this->arrowLeft = LoadTexture("assets/BattleUI/arrow_left.png");
+    this->middleFight = LoadTexture("assets/BattleUI/middle_fight.png");
+    this->arrowRight = LoadTexture("assets/BattleUI/arrow_right.png");
 }
 
 void BattleUI::UpdateWeaponSelection(){
@@ -95,6 +98,21 @@ void BattleUI::UpdateWeaponSelection(){
             Rectangle returnArrowRec = {50.0f, 550.0f,static_cast<float>(this->returnArrow.width) * scale, static_cast<float>(this->returnArrow.height) * scale};
             if((CheckCollisionPointRec(mousePosition, returnArrowRec)) && (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))){
                 this->selectedWeapon = WeaponSelection::None;
+            }
+            Rectangle Icon1 = {70.0f, 610.0f, static_cast<float>(this->boomerangAbilityIcons[0].width)*scale, static_cast<float>(this->boomerangAbilityIcons[0].height)*scale};
+            Rectangle Icon2 = {230.0f, 610.0f, static_cast<float>(this->boomerangAbilityIcons[1].width)*scale, static_cast<float>(this->boomerangAbilityIcons[1].height)*scale};
+            Rectangle Icon3 = {390.0f, 610.0f, static_cast<float>(this->boomerangAbilityIcons[2].width)*scale, static_cast<float>(this->boomerangAbilityIcons[2].height)*scale};
+            Vector2 mousePosition = GetMousePosition();
+            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                if(CheckCollisionPointRec(mousePosition, Icon1)){
+                    this->selectedWeapon = WeaponSelection::ChooseTargetPistol;
+                }
+                else if(CheckCollisionPointRec(mousePosition, Icon2)){
+                    this->selectedWeapon = WeaponSelection::ChooseTargetPistol;
+                }
+                else if(CheckCollisionPointRec(mousePosition, Icon3)){
+                    this->selectedWeapon = WeaponSelection::ChooseTargetPistol;
+                }
             }
         }
         break;
@@ -206,6 +224,7 @@ void BattleUI::DrawPistolAbilities(const std::vector<PistolAbility>& abilities){
         DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         DrawTextEx(this->battleUIFont, "Choose an Ability", {675.0f, 610.0f}, 30.0f, 1.0f, BLACK);
     }
+
     }
 }
 
@@ -263,6 +282,14 @@ void BattleUI::DrawMonsterUI(){
     DrawTextureEx(this->monsterBattleBackground, {0.0f, 0.0f}, 0.0f, 8.0f, WHITE);
 }
 
+void BattleUI::DrawChooseTarget(){
+    if(selectedWeapon == WeaponSelection::ChooseTargetPistol || selectedWeapon == WeaponSelection::ChooseTargetBoomerang){
+        DrawTextureEx(this->arrowLeft, {440.0f, 420.0f}, 0.0f, 6.0f, WHITE);
+        DrawTextureEx(this->middleFight, {515.0f, 420.0f}, 0.0f, 6.0f, WHITE);
+        DrawTextureEx(this->arrowRight, {590.0f, 420.0f}, 0.0f, 6.0f, WHITE);
+    }
+}
+
 void BattleUI::Unload(){
     UnloadFont(this->battleUIFont);
     UnloadTexture(this->noWeaponSelectedYet);
@@ -285,5 +312,8 @@ void BattleUI::Unload(){
     UnloadTexture(this->abilityTextFieldNoText);
 
     UnloadTexture(this->monsterBattleBackground);
+    UnloadTexture(this->arrowLeft);
+    UnloadTexture(this->middleFight);
+    UnloadTexture(this->arrowRight);
 
 }
