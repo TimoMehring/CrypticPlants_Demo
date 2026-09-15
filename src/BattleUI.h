@@ -34,6 +34,8 @@ class BattleUI{
 
     Font battleUIFont;
 
+    Texture2D monsterBattleBackground;
+
     public:
     BattleUI();
 
@@ -44,6 +46,8 @@ class BattleUI{
     void LoadBoomerangAbilityIcons(const std::vector<BoomerangAbility>& abilities);
     void DrawPistolAbilities(const std::vector<PistolAbility>& abilities);
     void DrawBoomerangAbilities(const std::vector<BoomerangAbility>& abilities);
+
+    void DrawMonsterUI();
 
     void Unload();
 

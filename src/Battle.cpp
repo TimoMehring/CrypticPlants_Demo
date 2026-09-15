@@ -37,8 +37,9 @@ void Battle::Draw(){
     battleUI.DrawWeaponSelection();
     battleUI.DrawPistolAbilities(this->pistol.GetAbilities());
     battleUI.DrawBoomerangAbilities(this->boomerang.GetAbilities());
+    battleUI.DrawMonsterUI();
     if(currentMonster != nullptr){
-        currentMonster->DrawFront({300.0f, 20.0f}, 4.0f);
+        currentMonster->DrawFront({350.0f, 130.0f}, 8.0f);
     }
     //currentMonster->DrawBack({300.0f, 300.0f}, 4.0f);
 }

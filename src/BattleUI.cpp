@@ -17,6 +17,8 @@ BattleUI::BattleUI(){
     this->abilityTextFieldNoText = LoadTexture("assets/BattleUI/ability_text_field_no_text.png");
     this->returnArrow = LoadTexture("assets/BattleUI/return.png");
     this->returnBorder = LoadTexture("assets/BattleUI/return_border.png");
+
+    this->monsterBattleBackground = LoadTexture("assets/BattleUI/battle_monster_background.png");
 }
 
 void BattleUI::UpdateWeaponSelection(){
@@ -257,6 +259,10 @@ void BattleUI::DrawBoomerangAbilities(const std::vector<BoomerangAbility>& abili
     }
 }
 
+void BattleUI::DrawMonsterUI(){
+    DrawTextureEx(this->monsterBattleBackground, {0.0f, 0.0f}, 0.0f, 8.0f, WHITE);
+}
+
 void BattleUI::Unload(){
     UnloadFont(this->battleUIFont);
     UnloadTexture(this->noWeaponSelectedYet);
@@ -277,5 +283,7 @@ void BattleUI::Unload(){
     UnloadTexture(this->abilityTextField);
     UnloadTexture(this->abilityIcon);
     UnloadTexture(this->abilityTextFieldNoText);
+
+    UnloadTexture(this->monsterBattleBackground);
 
 }
