@@ -43,7 +43,7 @@ class BattleUI{
     void LoadPistolAbilityIcons(const std::vector<PistolAbility>& abilities);
     void LoadBoomerangAbilityIcons(const std::vector<BoomerangAbility>& abilities);
     void DrawPistolAbilities(const std::vector<PistolAbility>& abilities);
-    void DrawBoomerangAbilities();
+    void DrawBoomerangAbilities(const std::vector<BoomerangAbility>& abilities);
 
     void Unload();
 

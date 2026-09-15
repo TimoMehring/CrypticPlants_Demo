@@ -196,7 +196,7 @@ void BattleUI::LoadBoomerangAbilityIcons(const std::vector<BoomerangAbility>& ab
 
 }
 
-void BattleUI::DrawBoomerangAbilities(){
+void BattleUI::DrawBoomerangAbilities(const std::vector<BoomerangAbility>& abilities){
     if(selectedWeapon == WeaponSelection::ChooseAttackBoomerang){
     float scale = 5.0f;
     DrawTextureEx(this->boomerangAbilityIcons[0],{70.0f, 610.0f},0.0f,5.0f,WHITE);
@@ -210,12 +210,24 @@ void BattleUI::DrawBoomerangAbilities(){
     Vector2 mousePosition = GetMousePosition();
     if(CheckCollisionPointRec(mousePosition, Icon1)){
         DrawTextureEx(chooseAttackBorder, {70.0f, 610.0f}, 0.0f, 5.0f, WHITE);
+        DrawTextureEx(this->abilityTextField, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+        DrawTextureEx(this->abilityIcon, {560.0f, 620.0f}, 0.0f, 2.0f, WHITE);
+        DrawTextEx(this->battleUIFont, abilities[0].name.c_str(), {610.0f, 620.0f}, 30.0f, 1.0f, BLACK);
+        DrawTextEx(this->battleUIFont, abilities[0].description.c_str(), {560.0f, 660.0f}, 20.0f, 1.0f, BLACK);
     }
     if(CheckCollisionPointRec(mousePosition, Icon2)){
         DrawTextureEx(chooseAttackBorder, {230.0f, 610.0f}, 0.0f, 5.0f, WHITE);
+        DrawTextureEx(this->abilityTextField, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+        DrawTextureEx(this->abilityIcon, {560.0f, 620.0f}, 0.0f, 2.0f, WHITE);
+        DrawTextEx(this->battleUIFont, abilities[1].name.c_str(), {610.0f, 620.0f}, 30.0f, 1.0f, BLACK);
+        DrawTextEx(this->battleUIFont, abilities[1].description.c_str(), {560.0f, 660.0f}, 20.0f, 1.0f, BLACK);
     }
     if(CheckCollisionPointRec(mousePosition, Icon3)){
         DrawTextureEx(chooseAttackBorder, {390.0f, 610.0f}, 0.0f, 5.0f, WHITE);
+        DrawTextureEx(this->abilityTextField, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+        DrawTextureEx(this->abilityIcon, {560.0f, 620.0f}, 0.0f, 2.0f, WHITE);
+        DrawTextEx(this->battleUIFont, abilities[2].name.c_str(), {610.0f, 620.0f}, 30.0f, 1.0f, BLACK);
+        DrawTextEx(this->battleUIFont, abilities[2].description.c_str(), {560.0f, 660.0f}, 20.0f, 1.0f, BLACK);
     }
     }
 }

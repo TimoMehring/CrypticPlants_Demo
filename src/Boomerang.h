@@ -7,6 +7,7 @@ struct BoomerangAbility
 {
     std::string name;
     const char* iconPath;
+    std::string description;
 
     // sample ideas
     float returnHitChanceBonus;
