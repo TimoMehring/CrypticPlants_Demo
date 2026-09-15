@@ -5,12 +5,16 @@ BattleUI::BattleUI(){
     this->currentFrame = 0;
     this->frameTimer = 0.0f;
 
+    this->battleUIFont = LoadFont("assets/Fonts/PixelifySans-Regular.ttf");
+
     this->noWeaponSelectedYet = LoadTexture("assets/BattleUI/choose_weapon_base.png");
     this->pistolSelectedAnimation = LoadTexture("assets/BattleUI/choose_weapon_pistol_spritesheet.png");
     this->boomerangSelectedAnimation = LoadTexture("assets/BattleUI/choose_weapon_boomerang_spritesheet.png");
     this->chooseAttack = LoadTexture("assets/BattleUI/choose_attack.png");
     this->chooseAttackBorder = LoadTexture("assets/BattleUI/choose_attack_border.png");
     this->abilityTextField = LoadTexture("assets/BattleUI/ability_text_field.png");
+    this->abilityIcon = LoadTexture("assets/BattleUI/ability_icon.png");
+    this->abilityTextFieldNoText = LoadTexture("assets/BattleUI/ability_text_field_no_text.png");
     this->returnArrow = LoadTexture("assets/BattleUI/return.png");
     this->returnBorder = LoadTexture("assets/BattleUI/return_border.png");
 }
@@ -100,7 +104,7 @@ void BattleUI::DrawWeaponSelection(){
     float frameHeight = 33.0f;
     float scale = 5.0f;
 
-    DrawTextureEx(this->abilityTextField, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+    DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
 
     switch(this->selectedWeapon){
         case WeaponSelection::None:{
@@ -111,14 +115,14 @@ void BattleUI::DrawWeaponSelection(){
         case WeaponSelection::Pistol:{
             Rectangle source = {this->currentFrame * frameWidth, 0.0f, frameWidth, frameHeight};
             Rectangle destination = {50.0f, 600.0f, frameWidth * scale, frameHeight * scale};
-            DrawTexturePro(pistolSelectedAnimation, source, destination, {0.0f, 0.0f}, 0.0f, WHITE);
+            DrawTexturePro(this->pistolSelectedAnimation, source, destination, {0.0f, 0.0f}, 0.0f, WHITE);
         }
             break;
 
         case WeaponSelection::Boommerang:{
             Rectangle source = {this->currentFrame * frameWidth, 0.0f, frameWidth, frameHeight};
             Rectangle destination = {50.0f, 600.0f, frameWidth * scale, frameHeight * scale};
-            DrawTexturePro(boomerangSelectedAnimation, source, destination, {0.0f, 0.0f}, 0.0f, WHITE);
+            DrawTexturePro(this->boomerangSelectedAnimation, source, destination, {0.0f, 0.0f}, 0.0f, WHITE);
         }
             break;
         
@@ -159,15 +163,25 @@ void BattleUI::DrawPistolAbilities(const std::vector<PistolAbility>& abilities){
     Vector2 mousePosition = GetMousePosition();
     if(CheckCollisionPointRec(mousePosition, Icon1)){
         DrawTextureEx(chooseAttackBorder, {70.0f, 610.0f}, 0.0f, 5.0f, WHITE);
-        DrawText(abilities[0].description.c_str(), 600, 650, 15.0f, BLACK);
+        DrawTextureEx(this->abilityTextField, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+        DrawTextureEx(this->abilityIcon, {560.0f, 620.0f}, 0.0f, 2.0f, WHITE);
+        DrawTextEx(this->battleUIFont, abilities[0].name.c_str(), {610.0f, 620.0f}, 30.0f, 1.0f, BLACK);
+        DrawTextEx(this->battleUIFont, abilities[0].description.c_str(), {560.0f, 660.0f}, 20.0f, 1.0f, BLACK);
+        //DrawText(abilities[0].description.c_str(), 600, 650, 15.0f, BLACK);
     }
     if(CheckCollisionPointRec(mousePosition, Icon2)){
         DrawTextureEx(chooseAttackBorder, {230.0f, 610.0f}, 0.0f, 5.0f, WHITE);
-        DrawText(abilities[1].description.c_str(), 600, 650, 15.0f, BLACK);
+        DrawTextureEx(this->abilityTextField, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+        DrawTextureEx(this->abilityIcon, {560.0f, 620.0f}, 0.0f, 2.0f, WHITE);
+        DrawTextEx(this->battleUIFont, abilities[1].name.c_str(), {610.0f, 620.0f}, 30.0f, 1.0f, BLACK);
+        DrawTextEx(this->battleUIFont, abilities[1].description.c_str(), {560.0f, 660.0f}, 20.0f, 1.0f, BLACK);
     }
     if(CheckCollisionPointRec(mousePosition, Icon3)){
         DrawTextureEx(chooseAttackBorder, {390.0f, 610.0f}, 0.0f, 5.0f, WHITE);
-        DrawText(abilities[2].description.c_str(), 600, 650, 15.0f, BLACK);
+        DrawTextureEx(this->abilityTextField, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+        DrawTextureEx(this->abilityIcon, {560.0f, 620.0f}, 0.0f, 2.0f, WHITE);
+        DrawTextEx(this->battleUIFont, abilities[2].name.c_str(), {610.0f, 620.0f}, 30.0f, 1.0f, BLACK);
+        DrawTextEx(this->battleUIFont, abilities[2].description.c_str(), {560.0f, 660.0f}, 20.0f, 1.0f, BLACK);
     }
     }
 }
@@ -207,6 +221,7 @@ void BattleUI::DrawBoomerangAbilities(){
 }
 
 void BattleUI::Unload(){
+    UnloadFont(this->battleUIFont);
     UnloadTexture(this->noWeaponSelectedYet);
     UnloadTexture(this->pistolSelectedAnimation);
     UnloadTexture(this->boomerangSelectedAnimation);
@@ -222,5 +237,8 @@ void BattleUI::Unload(){
     UnloadTexture(this->boomerangAbilityIcons[0]);
     UnloadTexture(this->boomerangAbilityIcons[1]);
     UnloadTexture(this->boomerangAbilityIcons[2]);
+    UnloadTexture(this->abilityTextField);
+    UnloadTexture(this->abilityIcon);
+    UnloadTexture(this->abilityTextFieldNoText);
 
 }

@@ -29,6 +29,10 @@ class BattleUI{
     Texture2D pistolAbilityIcons[3];
     Texture2D boomerangAbilityIcons[3];
     Texture2D abilityTextField;
+    Texture2D abilityIcon;
+    Texture2D abilityTextFieldNoText;
+
+    Font battleUIFont;
 
     public:
     BattleUI();
