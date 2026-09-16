@@ -302,7 +302,7 @@ void BattleUI::DrawMonsterUI(){
     DrawTextureEx(this->monsterBattleBackground, {0.0f, 0.0f}, 0.0f, 8.0f, WHITE);
 }
 
-void BattleUI::DrawChooseTarget(){
+void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites, const std::vector<Texture2D>& boomerangBackSprites){
     if(selectedWeapon == WeaponSelection::ChooseTargetPistol){
         DrawTextureEx(this->chooseTargetPistolUI, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->middleFight, {510.0f, 420.0f}, 0.0f, 8.0f, WHITE);

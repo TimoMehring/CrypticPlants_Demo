@@ -24,6 +24,7 @@ class Boomerang{
     float secondHitChance;
 
     std::vector<BoomerangAbility> abilities;
+    std::vector<Texture2D> abilityBackSprites;
 
     void LoadAbilities();
 
@@ -32,4 +33,5 @@ class Boomerang{
 
     float CalculateDamage();
     const std::vector<BoomerangAbility>& GetAbilities();
+    const std::vector<Texture2D>& GetAbilityBackSprite();
 };

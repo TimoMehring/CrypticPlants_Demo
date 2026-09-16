@@ -18,3 +18,7 @@ void Boomerang::LoadAbilities(){
 const std::vector<BoomerangAbility>& Boomerang::GetAbilities(){
     return this->abilities;
 }
+
+const std::vector<Texture2D>& Boomerang::GetAbilityBackSprite(){
+    return this->abilityBackSprites;
+}

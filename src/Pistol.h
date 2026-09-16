@@ -21,6 +21,7 @@ class Pistol{
     float attack;
 
     std::vector<PistolAbility> abilities;
+    std::vector<Texture2D> abilityBackSprites;
 
     void LoadAbilities();
 
@@ -29,4 +30,5 @@ class Pistol{
 
     float CalculateDamage();
     const std::vector<PistolAbility>& GetAbilities();
+    const std::vector<Texture2D>& GetAbilityBackSprite();
 };

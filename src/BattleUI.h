@@ -57,7 +57,7 @@ class BattleUI{
     void DrawBoomerangAbilities(const std::vector<BoomerangAbility>& abilities);
 
     void DrawMonsterUI();
-    void DrawChooseTarget();
+    void DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites, const std::vector<Texture2D>& boomerangBackSprites);
 
     void Unload();
 

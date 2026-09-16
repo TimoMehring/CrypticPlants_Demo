@@ -18,3 +18,7 @@ void Pistol::LoadAbilities(){
 const std::vector<PistolAbility>& Pistol::GetAbilities(){
     return this->abilities;
 }
+
+const std::vector<Texture2D>& Pistol::GetAbilityBackSprite(){
+    return this->abilityBackSprites;
+}
