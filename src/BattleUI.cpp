@@ -18,8 +18,10 @@ BattleUI::BattleUI(){
     this->abilityBorderGreen = LoadTexture("assets/BattleUI/ability_border_green.png");
     this->abilityTextFieldNoText = LoadTexture("assets/BattleUI/ability_text_field_no_text.png");
     this->returnArrow = LoadTexture("assets/BattleUI/return.png");
+    this->returnDead = LoadTexture("assets/BattleUI/returnDead.png");
     this->returnBorder = LoadTexture("assets/BattleUI/return_border.png");
     this->playerSection = LoadTexture("assets/BattleUI/player_section.png");
+    this->playerSectionXp = LoadTexture("assets/BattleUI/player_section_xp.png");
     this->playerBorderGreen = LoadTexture("assets/BattleUI/player_border_green.png");
     this->healthBarBorder = LoadTexture("assets/BattleUI/healthbar_border.png");
 
@@ -159,6 +161,7 @@ void BattleUI::DrawWeaponSelection(){
 
     switch(this->selectedWeapon){
         case WeaponSelection::None:{
+            DrawTextureEx(this->returnDead, {50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
             DrawTextureEx(this->noWeaponSelectedYet, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
             DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
             //Rectangle abilityTextFieldNoTextRec = {540.0f, 600.0f, static_cast<float>(this->abilityTextFieldNoText.width)* scale, static_cast<float>(this->abilityTextFieldNoText.height)*scale};
@@ -179,6 +182,7 @@ void BattleUI::DrawWeaponSelection(){
             break;
         
         case WeaponSelection::Pistol:{
+            DrawTextureEx(this->returnDead, {50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
             Rectangle source = {this->currentFrame * frameWidth, 0.0f, frameWidth, frameHeight};
             Rectangle destination = {50.0f, 600.0f, frameWidth * scale, frameHeight * scale};
             DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
@@ -198,6 +202,7 @@ void BattleUI::DrawWeaponSelection(){
             break;
 
         case WeaponSelection::Boommerang:{
+            DrawTextureEx(this->returnDead, {50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
             Rectangle source = {this->currentFrame * frameWidth, 0.0f, frameWidth, frameHeight};
             Rectangle destination = {50.0f, 600.0f, frameWidth * scale, frameHeight * scale};
             DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
@@ -345,18 +350,27 @@ void BattleUI::DrawBoomerangAbilities(const std::vector<BoomerangAbility>& abili
     }
 }
 
-void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLevel){
+void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLevel, float currentXp, float maxXp){
     Vector2 mousePosition = GetMousePosition();
     float scaleRec = 5.0f;
     Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
 
     //currentHealth = 10.0f; // TO TEST HEALTH BAR COLOR CHANGE [DELETE LATER]
-    float healthPercent = currentHealth / maxHealth;
+    currentXp = 1000.0f;
 
-    float barX = 220.0f; //200.0f
+    float healthPercent = currentHealth / maxHealth;
+    float xpPercent = currentXp / maxXp;
+
+    float barX = 220.0f; 
     float barY = 565.0f;
     float barWidth = 150.0f;
     float barHeight = 20.0f;
+    
+    Vector2 playerSectionXpPosition = {540.0f, 550.0f};
+    float xpBarX = 545.0f; //115, 595, 350, 5
+    float xpBarY = 595.0f;
+    float xpBarWidth = 350.0f;
+    float xpBarHeight = 5.0f;
 
     Color currentColor = DARKGREEN;
 
@@ -367,7 +381,7 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
         currentColor = GOLD;
     }
 
-    DrawTextureEx(this->healthBarBorder,{215.0f, 560.0f}, 0.0f, 5.0f, WHITE);   // 195.0f
+    DrawTextureEx(this->healthBarBorder,{215.0f, 560.0f}, 0.0f, 5.0f, WHITE);  
     DrawRectangle(barX, barY, barWidth * healthPercent, barHeight, currentColor);
 
     const char* healthText = TextFormat("%.0f/%.0f HP", currentHealth, maxHealth);
@@ -375,6 +389,10 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
 
     const char* levelText = TextFormat("Lvl %i", currentLevel);
     DrawTextEx(this->battleUIFont, levelText, {130.0f, 560.0f}, 30.0f, 1.0f, BLACK);
+
+    //DrawTextureEx(this->playerSectionXp, {110.f, 550.0f}, 0.0f, 5.0f, WHITE); // PLACED IN PLAYERUI
+    DrawTextureEx(this->playerSectionXp, {540.f, 550.0f}, 0.0f, 5.0f, WHITE);
+    DrawRectangle(xpBarX, xpBarY, xpBarWidth * xpPercent, xpBarHeight, ORANGE);
 
 }
 
@@ -384,6 +402,7 @@ void BattleUI::DrawMonsterUI(){
 
 void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites, const std::vector<Texture2D>& boomerangBackSprites){
     if(selectedWeapon == WeaponSelection::ChooseTargetPistol){
+        DrawTextureEx(this->returnDead, {50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->chooseTargetPistolUI, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->middleFight, {510.0f, 420.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->arrowLeft, {440.0f, 420.0f}, 0.0f, 5.0f, WHITE);
@@ -399,6 +418,7 @@ void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites,
         }
     }
     else if(selectedWeapon == WeaponSelection::ChooseTargetBoomerang){
+        DrawTextureEx(this->returnDead, {50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->chooseTargetBoomerangUI, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         if(abilityClicked == 0){
             DrawTextureEx(boomerangBackSprites[this->abilityClicked], {650.0f, 600.0f}, 0.0f, 5.0f, WHITE);
@@ -422,8 +442,10 @@ void BattleUI::Unload(){
     UnloadTexture(this->chooseAttack);
     UnloadTexture(this->chooseAttackBorder);
     UnloadTexture(this->returnArrow);
+    UnloadTexture(this->returnDead);
     UnloadTexture(this->returnBorder);
     UnloadTexture(this->playerSection);
+    UnloadTexture(this->playerSectionXp);
     UnloadTexture(this->playerBorderGreen);
     UnloadTexture(this->healthBarBorder);
 
