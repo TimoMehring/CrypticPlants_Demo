@@ -7,6 +7,7 @@ Boomerang::Boomerang(){
     this->attack = 100.0f;
 
     LoadAbilities();
+    LoadAbilityBackSprites();
 }
 
 void Boomerang::LoadAbilities(){
@@ -15,10 +16,22 @@ void Boomerang::LoadAbilities(){
     this->abilities.push_back({"Ability3", "assets/Abilities/Icon03.png", "Lorem ipsum dolor sit amet, consectetur adipiscing\n elit, sed do eiusmod tempor incididunt ut labore et\n dolore magna aliqua. Ut enim ad minim veniam, quis .", 0.0f, 0.0f});
 }
 
+void Boomerang::LoadAbilityBackSprites(){
+    this->abilityBackSprites.push_back(LoadTexture("assets/Abilities/icon01_backsprite.png"));
+    this->abilityBackSprites.push_back(LoadTexture("assets/Abilities/icon02_backsprite.png"));
+    this->abilityBackSprites.push_back(LoadTexture("assets/Abilities/icon03_backsprite.png"));
+}
+
 const std::vector<BoomerangAbility>& Boomerang::GetAbilities(){
     return this->abilities;
 }
 
 const std::vector<Texture2D>& Boomerang::GetAbilityBackSprite(){
     return this->abilityBackSprites;
+}
+
+void Boomerang::Unload(){
+    for(Texture2D texture : this->abilityBackSprites){
+        UnloadTexture(texture);
+    }
 }

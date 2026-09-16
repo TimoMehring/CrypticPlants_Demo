@@ -7,6 +7,7 @@ Pistol::Pistol(){
     this->attack = 100.0f;
 
     LoadAbilities();
+    LoadAbilityBackSprites();
 }
 
 void Pistol::LoadAbilities(){
@@ -15,10 +16,22 @@ void Pistol::LoadAbilities(){
     this->abilities.push_back({"Ability3", "assets/Abilities/Icon03.png", "Lorem ipsum dolor sit amet, consectetur adipiscing\n elit, sed do eiusmod tempor incididunt ut labore et\n dolore magna aliqua. Ut enim ad minim veniam, quis .", 0.0f, 0.0f});
 }
 
+void Pistol::LoadAbilityBackSprites(){
+    this->abilityBackSprites.push_back(LoadTexture("assets/Abilities/icon01_backsprite.png"));
+    this->abilityBackSprites.push_back(LoadTexture("assets/Abilities/icon02_backsprite.png"));
+    this->abilityBackSprites.push_back(LoadTexture("assets/Abilities/icon03_backsprite.png"));
+}
+
 const std::vector<PistolAbility>& Pistol::GetAbilities(){
     return this->abilities;
 }
 
 const std::vector<Texture2D>& Pistol::GetAbilityBackSprite(){
     return this->abilityBackSprites;
+}
+
+void Pistol::Unload(){
+    for(Texture2D texture : this->abilityBackSprites){
+        UnloadTexture(texture);
+    }
 }

@@ -27,6 +27,7 @@ class Boomerang{
     std::vector<Texture2D> abilityBackSprites;
 
     void LoadAbilities();
+    void LoadAbilityBackSprites();
 
     public:
     Boomerang();
@@ -34,4 +35,6 @@ class Boomerang{
     float CalculateDamage();
     const std::vector<BoomerangAbility>& GetAbilities();
     const std::vector<Texture2D>& GetAbilityBackSprite();
+
+    void Unload();
 };

@@ -24,6 +24,7 @@ class Pistol{
     std::vector<Texture2D> abilityBackSprites;
 
     void LoadAbilities();
+    void LoadAbilityBackSprites();
 
     public:
     Pistol();
@@ -31,4 +32,6 @@ class Pistol{
     float CalculateDamage();
     const std::vector<PistolAbility>& GetAbilities();
     const std::vector<Texture2D>& GetAbilityBackSprite();
+
+    void Unload();
 };
