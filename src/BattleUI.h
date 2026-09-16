@@ -16,6 +16,7 @@ enum class WeaponSelection{
 class BattleUI{
     private:
     Texture2D noWeaponSelectedYet;
+    Texture2D chooseWeaponBaseBorder;
     Texture2D pistolSelectedAnimation;
     Texture2D boomerangSelectedAnimation;
     Texture2D chooseAttack;
@@ -37,6 +38,7 @@ class BattleUI{
     Texture2D boomerangAbilityIcons[3];
     Texture2D abilityTextField;
     Texture2D abilityIcon;
+    Texture2D abilityBorderGreen;
     Texture2D abilityTextFieldNoText;
 
     Font battleUIFont;

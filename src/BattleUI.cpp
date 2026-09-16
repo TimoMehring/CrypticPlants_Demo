@@ -8,12 +8,14 @@ BattleUI::BattleUI(){
     this->battleUIFont = LoadFont("assets/Fonts/PixelifySans-Regular.ttf");
 
     this->noWeaponSelectedYet = LoadTexture("assets/BattleUI/choose_weapon_base.png");
+    this->chooseWeaponBaseBorder = LoadTexture("assets/BattleUI/chooseWeaponBaseBorder.png");
     this->pistolSelectedAnimation = LoadTexture("assets/BattleUI/choose_weapon_pistol_spritesheet.png");
     this->boomerangSelectedAnimation = LoadTexture("assets/BattleUI/choose_weapon_boomerang_spritesheet.png");
     this->chooseAttack = LoadTexture("assets/BattleUI/choose_attack.png");
     this->chooseAttackBorder = LoadTexture("assets/BattleUI/choose_attack_border.png");
     this->abilityTextField = LoadTexture("assets/BattleUI/ability_text_field.png");
     this->abilityIcon = LoadTexture("assets/BattleUI/ability_icon.png");
+    this->abilityBorderGreen = LoadTexture("assets/BattleUI/ability_border_green.png");
     this->abilityTextFieldNoText = LoadTexture("assets/BattleUI/ability_text_field_no_text.png");
     this->returnArrow = LoadTexture("assets/BattleUI/return.png");
     this->returnBorder = LoadTexture("assets/BattleUI/return_border.png");
@@ -150,6 +152,7 @@ void BattleUI::DrawWeaponSelection(){
 
     Vector2 mousePosition = GetMousePosition();
     Rectangle abilityTextFieldNoTextRec = {540.0f, 600.0f, static_cast<float>(this->abilityTextFieldNoText.width)* scale, static_cast<float>(this->abilityTextFieldNoText.height)*scale};
+    Rectangle chooseWeaponBaseRec = {50.0f, 600.0f, static_cast<float>(this->noWeaponSelectedYet.width)*scale, static_cast<float>(this->noWeaponSelectedYet.height)*scale};
 
     //DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
     DrawTextureEx(this->playerSection, {110.0f, 550.0f}, 0.0f, 5.0f, WHITE);
@@ -162,6 +165,10 @@ void BattleUI::DrawWeaponSelection(){
             //Rectangle abilityTextFieldNoTextRec = {540.0f, 600.0f, static_cast<float>(this->abilityTextFieldNoText.width)* scale, static_cast<float>(this->abilityTextFieldNoText.height)*scale};
             if(CheckCollisionPointRec(mousePosition, abilityTextFieldNoTextRec)){
                 DrawTextEx(this->battleUIFont, "Choose a Weapon", {685.0f, 610.0f}, 30.0f, 1.0f, BLACK);
+                DrawTextureEx(this->abilityBorderGreen, {45.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+            }
+            if(CheckCollisionPointRec(mousePosition, chooseWeaponBaseRec)){
+                DrawTextureEx(this->chooseWeaponBaseBorder, {45.0f, 600.0f}, 0.0f, 5.0f, WHITE);
             }
             float scaleRec = 5.0f;
             Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
@@ -406,6 +413,7 @@ void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites,
 void BattleUI::Unload(){
     UnloadFont(this->battleUIFont);
     UnloadTexture(this->noWeaponSelectedYet);
+    UnloadTexture(this->chooseWeaponBaseBorder);
     UnloadTexture(this->pistolSelectedAnimation);
     UnloadTexture(this->boomerangSelectedAnimation);
 
@@ -425,6 +433,7 @@ void BattleUI::Unload(){
     UnloadTexture(this->boomerangAbilityIcons[2]);
     UnloadTexture(this->abilityTextField);
     UnloadTexture(this->abilityIcon);
+    UnloadTexture(this->abilityBorderGreen);
     UnloadTexture(this->abilityTextFieldNoText);
 
     UnloadTexture(this->chooseTargetPistolUI);
