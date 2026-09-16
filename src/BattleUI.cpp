@@ -18,6 +18,9 @@ BattleUI::BattleUI(){
     this->returnArrow = LoadTexture("assets/BattleUI/return.png");
     this->returnBorder = LoadTexture("assets/BattleUI/return_border.png");
     this->playerSection = LoadTexture("assets/BattleUI/player_section.png");
+    this->playerBorderGreen = LoadTexture("assets/BattleUI/player_border_green.png");
+    this->healthBarBorder = LoadTexture("assets/BattleUI/healthbar_border.png");
+
 
     this->chooseTargetPistolUI = LoadTexture("assets/BattleUI/ui_choosetarget_pistol.png");
     this->chooseTargetBoomerangUI = LoadTexture("assets/BattleUI/ui_choosetarget_boomerang.png");
@@ -160,17 +163,30 @@ void BattleUI::DrawWeaponSelection(){
             if(CheckCollisionPointRec(mousePosition, abilityTextFieldNoTextRec)){
                 DrawTextEx(this->battleUIFont, "Choose a Weapon", {685.0f, 610.0f}, 30.0f, 1.0f, BLACK);
             }
+            float scaleRec = 5.0f;
+            Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
+
+            if(CheckCollisionPointRec(mousePosition, playerSectionRec)){
+                DrawTextureEx(this->playerBorderGreen, {45.0f, 550.0f}, 0.0f, 5.0f, WHITE);
+            }
         }
             break;
         
         case WeaponSelection::Pistol:{
             Rectangle source = {this->currentFrame * frameWidth, 0.0f, frameWidth, frameHeight};
             Rectangle destination = {50.0f, 600.0f, frameWidth * scale, frameHeight * scale};
-            DrawTexturePro(this->pistolSelectedAnimation, source, destination, {0.0f, 0.0f}, 0.0f, WHITE);
             DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+            DrawTexturePro(this->pistolSelectedAnimation, source, destination, {0.0f, 0.0f}, 0.0f, WHITE);
+            //DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
 
             if(CheckCollisionPointRec(mousePosition, abilityTextFieldNoTextRec)){
                 DrawTextEx(this->battleUIFont, "Choose a Weapon", {685.0f, 610.0f}, 30.0f, 1.0f, BLACK);
+            }
+
+            float scaleRec = 5.0f;
+            Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
+            if(CheckCollisionPointRec(mousePosition, playerSectionRec)){
+                DrawTextureEx(this->playerBorderGreen, {45.0f, 550.0f}, 0.0f, 5.0f, WHITE);
             }
         }
             break;
@@ -178,11 +194,17 @@ void BattleUI::DrawWeaponSelection(){
         case WeaponSelection::Boommerang:{
             Rectangle source = {this->currentFrame * frameWidth, 0.0f, frameWidth, frameHeight};
             Rectangle destination = {50.0f, 600.0f, frameWidth * scale, frameHeight * scale};
-            DrawTexturePro(this->boomerangSelectedAnimation, source, destination, {0.0f, 0.0f}, 0.0f, WHITE);
             DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+            DrawTexturePro(this->boomerangSelectedAnimation, source, destination, {0.0f, 0.0f}, 0.0f, WHITE);
 
             if(CheckCollisionPointRec(mousePosition, abilityTextFieldNoTextRec)){
                 DrawTextEx(this->battleUIFont, "Choose a Weapon", {685.0f, 610.0f}, 30.0f, 1.0f, BLACK);
+            }
+            float scaleRec = 5.0f;
+            Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
+
+            if(CheckCollisionPointRec(mousePosition, playerSectionRec)){
+                DrawTextureEx(this->playerBorderGreen, {45.0f, 550.0f}, 0.0f, 5.0f, WHITE);
             }
         }
             break;
@@ -196,6 +218,12 @@ void BattleUI::DrawWeaponSelection(){
             Rectangle returnArrowRec = {50.0f, 550.0f,static_cast<float>(this->returnArrow.width) * scale, static_cast<float>(this->returnArrow.height) * scale};
             if(CheckCollisionPointRec(mousePosition, returnArrowRec)){
                 DrawTextureEx(this->returnBorder,{50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
+            }
+            float scaleRec = 5.0f;
+            Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
+
+            if(CheckCollisionPointRec(mousePosition, playerSectionRec)){
+                DrawTextureEx(this->playerBorderGreen, {45.0f, 550.0f}, 0.0f, 5.0f, WHITE);
             }
             break;
         }
@@ -248,6 +276,11 @@ void BattleUI::DrawPistolAbilities(const std::vector<PistolAbility>& abilities){
         DrawTextEx(this->battleUIFont, "Choose an Ability", {675.0f, 610.0f}, 30.0f, 1.0f, BLACK);
     }
 
+    float scaleRec = 5.0f;
+    Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
+    if(CheckCollisionPointRec(mousePosition, playerSectionRec)){
+        DrawTextureEx(this->playerBorderGreen, {45.0f, 550.0f}, 0.0f, 5.0f, WHITE);
+    }
     }
 }
 
@@ -298,18 +331,42 @@ void BattleUI::DrawBoomerangAbilities(const std::vector<BoomerangAbility>& abili
         DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         DrawTextEx(this->battleUIFont, "Choose an Ability", {675.0f, 610.0f}, 30.0f, 1.0f, BLACK);
     }
+    float scaleRec = 5.0f;
+    Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
+    if(CheckCollisionPointRec(mousePosition, playerSectionRec)){
+        DrawTextureEx(this->playerBorderGreen, {45.0f, 550.0f}, 0.0f, 5.0f, WHITE);
+    }
     }
 }
 
 void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth){
+    Vector2 mousePosition = GetMousePosition();
+    float scaleRec = 5.0f;
+    Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
+
+    currentHealth = 10.0f; // TO TEST HEALTH BAR COLOR CHANGE [DELETE LATER]
     float healthPercent = currentHealth / maxHealth;
 
-    float barX = 200.0f;
+    float barX = 220.0f; //200.0f
     float barY = 565.0f;
     float barWidth = 150.0f;
     float barHeight = 20.0f;
 
-    DrawRectangle(barX, barY, barWidth * healthPercent, barHeight, DARKGREEN);
+    Color currentColor = DARKGREEN;
+
+    if(healthPercent <= 0.25f){
+        currentColor = MAROON;
+    }
+    else if(healthPercent <= 0.5f){
+        currentColor = GOLD;
+    }
+
+    DrawTextureEx(this->healthBarBorder,{215.0f, 560.0f}, 0.0f, 5.0f, WHITE);   // 195.0f
+    DrawRectangle(barX, barY, barWidth * healthPercent, barHeight, currentColor);
+
+/*     if(CheckCollisionPointRec(mousePosition, playerSectionRec)){
+        DrawTextureEx(this->playerBorderGreen, {45.0f, 550.0f}, 0.0f, 5.0f, WHITE);
+    } */
 }
 
 void BattleUI::DrawMonsterUI(){
@@ -357,6 +414,8 @@ void BattleUI::Unload(){
     UnloadTexture(this->returnArrow);
     UnloadTexture(this->returnBorder);
     UnloadTexture(this->playerSection);
+    UnloadTexture(this->playerBorderGreen);
+    UnloadTexture(this->healthBarBorder);
 
     UnloadTexture(this->pistolAbilityIcons[0]);
     UnloadTexture(this->pistolAbilityIcons[1]);

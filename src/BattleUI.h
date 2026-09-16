@@ -23,6 +23,8 @@ class BattleUI{
     Texture2D returnArrow;
     Texture2D returnBorder;
     Texture2D playerSection;
+    Texture2D playerBorderGreen;
+    Texture2D healthBarBorder;
 
     WeaponSelection selectedWeapon;
 
