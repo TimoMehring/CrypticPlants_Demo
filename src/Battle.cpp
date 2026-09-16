@@ -47,6 +47,8 @@ void Battle::Draw(){
 
 void Battle::Unload(){
     battleUI.Unload();
+    pistol.Unload();
+    boomerang.Unload();
     if(currentMonster != nullptr){
         currentMonster->Unload();
         delete currentMonster;

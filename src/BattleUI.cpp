@@ -309,25 +309,25 @@ void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites,
         DrawTextureEx(this->arrowLeft, {440.0f, 420.0f}, 0.0f, 8.0f, WHITE);
         DrawTextureEx(this->arrowRight, {580.0f, 420.0f}, 0.0f, 8.0f, WHITE);
         if(abilityClicked == 0){
-
+            DrawTextureEx(pistolBackSprites[this->abilityClicked], {650.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         }
         else if(abilityClicked == 1){
-
+            DrawTextureEx(pistolBackSprites[this->abilityClicked], {650.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         }
         else if(abilityClicked == 2){
-
+            DrawTextureEx(pistolBackSprites[this->abilityClicked], {650.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         }
     }
     else if(selectedWeapon == WeaponSelection::ChooseTargetBoomerang){
         DrawTextureEx(this->chooseTargetBoomerangUI, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         if(abilityClicked == 0){
-
+            DrawTextureEx(boomerangBackSprites[this->abilityClicked], {650.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         }
         else if(abilityClicked == 1){
-
+            DrawTextureEx(boomerangBackSprites[this->abilityClicked], {650.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         }
         else if(abilityClicked == 2){
-            
+            DrawTextureEx(boomerangBackSprites[this->abilityClicked], {650.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         }
     }
 }
