@@ -22,6 +22,7 @@ class BattleUI{
     Texture2D chooseAttackBorder;
     Texture2D returnArrow;
     Texture2D returnBorder;
+    Texture2D playerSection;
 
     WeaponSelection selectedWeapon;
 
@@ -56,6 +57,7 @@ class BattleUI{
     void DrawPistolAbilities(const std::vector<PistolAbility>& abilities);
     void DrawBoomerangAbilities(const std::vector<BoomerangAbility>& abilities);
 
+    void DrawPlayerUI(float currentHealth, float maxHealth);
     void DrawMonsterUI();
     void DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites, const std::vector<Texture2D>& boomerangBackSprites);
 

@@ -17,6 +17,7 @@ BattleUI::BattleUI(){
     this->abilityTextFieldNoText = LoadTexture("assets/BattleUI/ability_text_field_no_text.png");
     this->returnArrow = LoadTexture("assets/BattleUI/return.png");
     this->returnBorder = LoadTexture("assets/BattleUI/return_border.png");
+    this->playerSection = LoadTexture("assets/BattleUI/player_section.png");
 
     this->chooseTargetPistolUI = LoadTexture("assets/BattleUI/ui_choosetarget_pistol.png");
     this->chooseTargetBoomerangUI = LoadTexture("assets/BattleUI/ui_choosetarget_boomerang.png");
@@ -148,6 +149,8 @@ void BattleUI::DrawWeaponSelection(){
     Rectangle abilityTextFieldNoTextRec = {540.0f, 600.0f, static_cast<float>(this->abilityTextFieldNoText.width)* scale, static_cast<float>(this->abilityTextFieldNoText.height)*scale};
 
     //DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+    DrawTextureEx(this->playerSection, {110.0f, 550.0f}, 0.0f, 5.0f, WHITE);
+    DrawTextEx(this->battleUIFont, "Lvl 10", {130.0f, 560.0f}, 30.0f, 1.0f, BLACK);
 
     switch(this->selectedWeapon){
         case WeaponSelection::None:{
@@ -298,6 +301,17 @@ void BattleUI::DrawBoomerangAbilities(const std::vector<BoomerangAbility>& abili
     }
 }
 
+void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth){
+    float healthPercent = currentHealth / maxHealth;
+
+    float barX = 200.0f;
+    float barY = 565.0f;
+    float barWidth = 150.0f;
+    float barHeight = 20.0f;
+
+    DrawRectangle(barX, barY, barWidth * healthPercent, barHeight, DARKGREEN);
+}
+
 void BattleUI::DrawMonsterUI(){
     DrawTextureEx(this->monsterBattleBackground, {0.0f, 0.0f}, 0.0f, 8.0f, WHITE);
 }
@@ -305,9 +319,9 @@ void BattleUI::DrawMonsterUI(){
 void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites, const std::vector<Texture2D>& boomerangBackSprites){
     if(selectedWeapon == WeaponSelection::ChooseTargetPistol){
         DrawTextureEx(this->chooseTargetPistolUI, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
-        DrawTextureEx(this->middleFight, {510.0f, 420.0f}, 0.0f, 8.0f, WHITE);
-        DrawTextureEx(this->arrowLeft, {440.0f, 420.0f}, 0.0f, 8.0f, WHITE);
-        DrawTextureEx(this->arrowRight, {580.0f, 420.0f}, 0.0f, 8.0f, WHITE);
+        DrawTextureEx(this->middleFight, {510.0f, 420.0f}, 0.0f, 5.0f, WHITE);
+        DrawTextureEx(this->arrowLeft, {440.0f, 420.0f}, 0.0f, 5.0f, WHITE);
+        DrawTextureEx(this->arrowRight, {580.0f, 420.0f}, 0.0f, 5.0f, WHITE);
         if(abilityClicked == 0){
             DrawTextureEx(pistolBackSprites[this->abilityClicked], {650.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         }
@@ -342,6 +356,7 @@ void BattleUI::Unload(){
     UnloadTexture(this->chooseAttackBorder);
     UnloadTexture(this->returnArrow);
     UnloadTexture(this->returnBorder);
+    UnloadTexture(this->playerSection);
 
     UnloadTexture(this->pistolAbilityIcons[0]);
     UnloadTexture(this->pistolAbilityIcons[1]);

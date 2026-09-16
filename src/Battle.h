@@ -3,6 +3,7 @@
 #include "Monster.h"
 #include "BattleUI.h"
 #include "Pistol.h"
+#include "Player.h"
 #include "Boomerang.h"
 #include <vector>
 #include <optional>
@@ -17,6 +18,7 @@ enum class BattleState{
 class Battle{
     private:
     BattleUI battleUI;
+    Player player;
     Pistol pistol;
     Boomerang boomerang;
 

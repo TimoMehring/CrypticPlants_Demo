@@ -9,7 +9,8 @@ enum class WeaponType{
 
 class Player{
     private:
-    float health;
+    float currentHealth;
+    float maxHealth;
 
     WeaponType currentWeapon;
 
@@ -19,5 +20,8 @@ class Player{
     void SwitchWeapon();
     void Update();
     void Draw();
+
+    float GetCurrentHealth() const;
+    float GetMaxHealth() const;
 
 };
