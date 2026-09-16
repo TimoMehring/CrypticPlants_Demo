@@ -156,7 +156,6 @@ void BattleUI::DrawWeaponSelection(){
 
     //DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
     DrawTextureEx(this->playerSection, {110.0f, 550.0f}, 0.0f, 5.0f, WHITE);
-    DrawTextEx(this->battleUIFont, "Lvl 10", {130.0f, 560.0f}, 30.0f, 1.0f, BLACK);
 
     switch(this->selectedWeapon){
         case WeaponSelection::None:{
@@ -346,12 +345,12 @@ void BattleUI::DrawBoomerangAbilities(const std::vector<BoomerangAbility>& abili
     }
 }
 
-void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth){
+void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLevel){
     Vector2 mousePosition = GetMousePosition();
     float scaleRec = 5.0f;
     Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
 
-    currentHealth = 10.0f; // TO TEST HEALTH BAR COLOR CHANGE [DELETE LATER]
+    //currentHealth = 10.0f; // TO TEST HEALTH BAR COLOR CHANGE [DELETE LATER]
     float healthPercent = currentHealth / maxHealth;
 
     float barX = 220.0f; //200.0f
@@ -371,9 +370,12 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth){
     DrawTextureEx(this->healthBarBorder,{215.0f, 560.0f}, 0.0f, 5.0f, WHITE);   // 195.0f
     DrawRectangle(barX, barY, barWidth * healthPercent, barHeight, currentColor);
 
-/*     if(CheckCollisionPointRec(mousePosition, playerSectionRec)){
-        DrawTextureEx(this->playerBorderGreen, {45.0f, 550.0f}, 0.0f, 5.0f, WHITE);
-    } */
+    const char* healthText = TextFormat("%.0f/%.0f HP", currentHealth, maxHealth);
+    DrawTextEx(this->battleUIFont, healthText, {390.0f, 560.0f}, 30.0f, 1.0f, BLACK);
+
+    const char* levelText = TextFormat("Lvl %i", currentLevel);
+    DrawTextEx(this->battleUIFont, levelText, {130.0f, 560.0f}, 30.0f, 1.0f, BLACK);
+
 }
 
 void BattleUI::DrawMonsterUI(){

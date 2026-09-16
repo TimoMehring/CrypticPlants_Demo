@@ -61,7 +61,7 @@ class BattleUI{
     void DrawPistolAbilities(const std::vector<PistolAbility>& abilities);
     void DrawBoomerangAbilities(const std::vector<BoomerangAbility>& abilities);
 
-    void DrawPlayerUI(float currentHealth, float maxHealth);
+    void DrawPlayerUI(float currentHealth, float maxHealth, int currentLevel);
     void DrawMonsterUI();
     void DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites, const std::vector<Texture2D>& boomerangBackSprites);
 

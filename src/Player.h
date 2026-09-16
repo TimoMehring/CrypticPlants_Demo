@@ -12,6 +12,10 @@ class Player{
     float currentHealth;
     float maxHealth;
 
+    int currentLevel;
+    float currentXp;
+    float maxXP;
+
     WeaponType currentWeapon;
 
     public:
@@ -23,5 +27,9 @@ class Player{
 
     float GetCurrentHealth() const;
     float GetMaxHealth() const;
+
+    float GetLevel() const;
+    float GetCurrentXp() const;
+    float GetMaxXP() const;
 
 };
