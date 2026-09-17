@@ -38,6 +38,7 @@ void Battle::Draw(){
     battleUI.DrawPistolAbilities(this->pistol.GetAbilities());
     battleUI.DrawBoomerangAbilities(this->boomerang.GetAbilities());
     battleUI.DrawMonsterUI();
+    battleUI.DrawChooseTarget(this->pistol.GetAbilityBackSprite(), this->boomerang.GetAbilityBackSprite());
     battleUI.DrawPlayerUI(this->player.GetCurrentHealth(), this->player.GetMaxHealth(), this->player.GetLevel(), this->player.GetCurrentXp(), this->player.GetMaxXP());
     battleUI.DrawChooseTarget(this->pistol.GetAbilityBackSprite(), this->boomerang.GetAbilityBackSprite());
     if(currentMonster != nullptr){

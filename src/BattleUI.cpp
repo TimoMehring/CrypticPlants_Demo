@@ -164,20 +164,6 @@ void BattleUI::DrawWeaponSelection(){
             DrawTextureEx(this->returnDead, {50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
             DrawTextureEx(this->noWeaponSelectedYet, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
             DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
-            //Rectangle abilityTextFieldNoTextRec = {540.0f, 600.0f, static_cast<float>(this->abilityTextFieldNoText.width)* scale, static_cast<float>(this->abilityTextFieldNoText.height)*scale};
-            if(CheckCollisionPointRec(mousePosition, abilityTextFieldNoTextRec)){
-                DrawTextEx(this->battleUIFont, "Choose a Weapon", {685.0f, 610.0f}, 30.0f, 1.0f, BLACK);
-                DrawTextureEx(this->abilityBorderGreen, {45.0f, 600.0f}, 0.0f, 5.0f, WHITE);
-            }
-            if(CheckCollisionPointRec(mousePosition, chooseWeaponBaseRec)){
-                DrawTextureEx(this->chooseWeaponBaseBorder, {45.0f, 600.0f}, 0.0f, 5.0f, WHITE);
-            }
-            float scaleRec = 5.0f;
-            Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
-
-            if(CheckCollisionPointRec(mousePosition, playerSectionRec)){
-                DrawTextureEx(this->playerBorderGreen, {45.0f, 550.0f}, 0.0f, 5.0f, WHITE);
-            }
         }
             break;
         
@@ -187,17 +173,11 @@ void BattleUI::DrawWeaponSelection(){
             Rectangle destination = {50.0f, 600.0f, frameWidth * scale, frameHeight * scale};
             DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
             DrawTexturePro(this->pistolSelectedAnimation, source, destination, {0.0f, 0.0f}, 0.0f, WHITE);
-            //DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
 
             if(CheckCollisionPointRec(mousePosition, abilityTextFieldNoTextRec)){
                 DrawTextEx(this->battleUIFont, "Choose a Weapon", {685.0f, 610.0f}, 30.0f, 1.0f, BLACK);
             }
 
-            float scaleRec = 5.0f;
-            Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
-            if(CheckCollisionPointRec(mousePosition, playerSectionRec)){
-                DrawTextureEx(this->playerBorderGreen, {45.0f, 550.0f}, 0.0f, 5.0f, WHITE);
-            }
         }
             break;
 
@@ -229,12 +209,6 @@ void BattleUI::DrawWeaponSelection(){
             Rectangle returnArrowRec = {50.0f, 550.0f,static_cast<float>(this->returnArrow.width) * scale, static_cast<float>(this->returnArrow.height) * scale};
             if(CheckCollisionPointRec(mousePosition, returnArrowRec)){
                 DrawTextureEx(this->returnBorder,{50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
-            }
-            float scaleRec = 5.0f;
-            Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
-
-            if(CheckCollisionPointRec(mousePosition, playerSectionRec)){
-                DrawTextureEx(this->playerBorderGreen, {45.0f, 550.0f}, 0.0f, 5.0f, WHITE);
             }
             break;
         }
@@ -393,6 +367,42 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
     //DrawTextureEx(this->playerSectionXp, {110.f, 550.0f}, 0.0f, 5.0f, WHITE); // PLACED IN PLAYERUI
     DrawTextureEx(this->playerSectionXp, {540.f, 550.0f}, 0.0f, 5.0f, WHITE);
     DrawRectangle(xpBarX, xpBarY, xpBarWidth * xpPercent, xpBarHeight, ORANGE);
+
+    // Moved from DrawWeaponSelection due to draw order issues
+    float scale = 5.0f;
+    Rectangle chooseWeaponBaseRec = {50.0f, 600.0f, static_cast<float>(this->noWeaponSelectedYet.width)*scale, static_cast<float>(this->noWeaponSelectedYet.height)*scale};
+    Rectangle abilityTextFieldNoTextRec = {540.0f, 600.0f, static_cast<float>(this->abilityTextFieldNoText.width)* scale, static_cast<float>(this->abilityTextFieldNoText.height)*scale};
+    switch(this->selectedWeapon){
+        case WeaponSelection::None:{
+            if(CheckCollisionPointRec(mousePosition, abilityTextFieldNoTextRec)){
+                DrawTextEx(this->battleUIFont, "Choose a Weapon", {685.0f, 610.0f}, 30.0f, 1.0f, BLACK);
+                DrawTextureEx(this->abilityBorderGreen, {45.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+            }
+            if(CheckCollisionPointRec(mousePosition, chooseWeaponBaseRec)){
+                DrawTextureEx(this->chooseWeaponBaseBorder, {45.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+            }
+
+            Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
+            if(CheckCollisionPointRec(mousePosition, playerSectionRec)){
+                DrawTextureEx(this->playerBorderGreen, {45.0f, 550.0f}, 0.0f, 5.0f, WHITE);
+            }
+        }
+            break;
+        
+        case WeaponSelection::Boommerang:
+        case WeaponSelection::Pistol:
+        case WeaponSelection::ChooseAttackPistol:
+        case WeaponSelection::ChooseAttackBoomerang:{
+
+            Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
+            if(CheckCollisionPointRec(mousePosition, playerSectionRec)){
+                DrawTextureEx(this->playerBorderGreen, {45.0f, 550.0f}, 0.0f, 5.0f, WHITE);
+            }
+        }
+        break;
+            
+
+    }
 
 }
 
