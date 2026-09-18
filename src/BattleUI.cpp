@@ -21,7 +21,10 @@ BattleUI::BattleUI(){
     this->returnDead = LoadTexture("assets/BattleUI/returnDead.png");
     this->returnBorder = LoadTexture("assets/BattleUI/return_border.png");
     this->playerSection = LoadTexture("assets/BattleUI/player_section.png");
+    this->lvlIcon = LoadTexture("assets/BattleUI/lvl.png");
+    this->hpIcon = LoadTexture("assets/BattleUI/hp.png");
     this->playerSectionXp = LoadTexture("assets/BattleUI/player_section_xp.png");
+    this->xpIcon = LoadTexture("assets/BattleUI/xp.png");
     this->playerBorderGreen = LoadTexture("assets/BattleUI/player_border_green.png");
     this->healthBarBorder = LoadTexture("assets/BattleUI/healthbar_border.png");
 
@@ -158,7 +161,9 @@ void BattleUI::DrawWeaponSelection(){
 
     //DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
     DrawTextureEx(this->playerSection, {110.0f, 550.0f}, 0.0f, 5.0f, WHITE);
-    DrawTextureEx(this->upperUI, {50.0f, 405.0f}, 0.0f, 5.0f, WHITE);
+    DrawTextureEx(this->lvlIcon, {130.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+    DrawTextureEx(this->hpIcon, {490.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+    DrawTextureEx(this->upperUI, {50.0f, 395.0f}, 0.0f, 5.0f, WHITE); 
     //DrawTextureEx(this->returnDead, {975.0f, 550.0f}, 0.0f, 5.0f, WHITE); // Right zone
 
     switch(this->selectedWeapon){
@@ -360,14 +365,15 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
     DrawTextureEx(this->healthBarBorder,{215.0f, 560.0f}, 0.0f, 5.0f, WHITE);  
     DrawRectangle(barX, barY, barWidth * healthPercent, barHeight, currentColor);
 
-    const char* healthText = TextFormat("%.0f/%.0f HP", currentHealth, maxHealth);
+    const char* healthText = TextFormat("%.0f/%.0f", currentHealth, maxHealth);
     DrawTextEx(this->battleUIFont, healthText, {390.0f, 560.0f}, 30.0f, 1.0f, BLACK);
 
-    const char* levelText = TextFormat("Lvl %i", currentLevel);
-    DrawTextEx(this->battleUIFont, levelText, {130.0f, 560.0f}, 30.0f, 1.0f, BLACK);
+    const char* levelText = TextFormat("%i", currentLevel); // "Lvl %i"
+    DrawTextEx(this->battleUIFont, levelText, {180.0f, 560.0f}, 30.0f, 1.0f, BLACK);
 
     //DrawTextureEx(this->playerSectionXp, {110.f, 550.0f}, 0.0f, 5.0f, WHITE); // PLACED IN PLAYERUI
     DrawTextureEx(this->playerSectionXp, {540.f, 550.0f}, 0.0f, 5.0f, WHITE);
+    DrawTextureEx(this->xpIcon, {1010.0f, 585.0f}, 0.0f, 2.0f, WHITE);
     DrawRectangle(xpBarX, xpBarY, xpBarWidth * xpPercent, xpBarHeight, ORANGE);
 
     // Moved from DrawWeaponSelection due to draw order issues
@@ -457,7 +463,10 @@ void BattleUI::Unload(){
     UnloadTexture(this->returnDead);
     UnloadTexture(this->returnBorder);
     UnloadTexture(this->playerSection);
+    UnloadTexture(this->lvlIcon);
+    UnloadTexture(this->hpIcon);
     UnloadTexture(this->playerSectionXp);
+    UnloadTexture(this->xpIcon);
     UnloadTexture(this->playerBorderGreen);
     UnloadTexture(this->healthBarBorder);
 

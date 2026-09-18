@@ -25,7 +25,10 @@ class BattleUI{
     Texture2D returnDead;
     Texture2D returnBorder;
     Texture2D playerSection;
+    Texture2D lvlIcon;
+    Texture2D hpIcon;
     Texture2D playerSectionXp;
+    Texture2D xpIcon;
     Texture2D playerBorderGreen;
     Texture2D healthBarBorder;
 
