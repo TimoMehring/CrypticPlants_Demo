@@ -176,7 +176,7 @@ void BattleUI::DrawWeaponSelection(){
     DrawTextureEx(this->playerSection, {110.0f, 550.0f}, 0.0f, 5.0f, WHITE);
     DrawTextureEx(this->lvlIcon, {120.0f, 562.0f}, 0.0f, 3.0f, WHITE);
     // SAMPLE WHERE TO PLACE NUMBERS LATER
-    DrawTextureEx(this->numberTen, {180.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+    //DrawTextureEx(this->numberTen, {180.0f, 562.0f}, 0.0f, 3.0f, WHITE);
     DrawTextureEx(this->hpIcon, {490.0f, 562.0f}, 0.0f, 3.0f, WHITE);
     DrawTextureEx(this->upperUI, {50.0f, 395.0f}, 0.0f, 5.0f, WHITE); 
 
@@ -350,8 +350,10 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
     float scaleRec = 5.0f;
     Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
 
+    // TESTING VALUES DELETE LATER
     //currentHealth = 10.0f; // TO TEST HEALTH BAR COLOR CHANGE [DELETE LATER]
     currentXp = 1000.0f;
+    currentLevel = 9;
 
     float healthPercent = currentHealth / maxHealth;
     float xpPercent = currentXp / maxXp;
@@ -383,7 +385,41 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
     DrawTextEx(this->battleUIFont, healthText, {390.0f, 560.0f}, 30.0f, 1.0f, BLACK);
 
 /*     const char* levelText = TextFormat("%i", currentLevel); // "Lvl %i"
-    DrawTextEx(this->battleUIFont, levelText, {180.0f, 560.0f}, 30.0f, 1.0f, BLACK); */
+    DrawTextEx(this->battleUIFont, levelText, {180.0f, 560.0f}, 30.0f, 1.0f, BLACK); */ //due to tests for the numbers with own textures
+
+    switch(currentLevel){
+        case 1:
+        DrawTextureEx(this->numberOne, {180.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+        break;
+        case 2:
+        DrawTextureEx(this->numberTwo, {180.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+        break;
+        case 3:
+        DrawTextureEx(this->numberThree, {180.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+        break;
+        case 4:
+        DrawTextureEx(this->numberFour, {180.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+        break;
+        case 5:
+        DrawTextureEx(this->numberFive, {180.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+        break;
+        case 6:
+        DrawTextureEx(this->numberSix, {180.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+        break;
+        case 7:
+        DrawTextureEx(this->numberSeven, {180.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+        break;
+        case 8:
+        DrawTextureEx(this->numberEight, {180.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+        break;
+        case 9:
+        DrawTextureEx(this->numberNine, {180.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+        break;
+        case 10:
+        DrawTextureEx(this->numberTen, {180.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+        break;
+              
+    }
 
     //DrawTextureEx(this->playerSectionXp, {110.f, 550.0f}, 0.0f, 5.0f, WHITE); // PLACED IN PLAYERUI
     DrawTextureEx(this->playerSectionXp, {540.f, 550.0f}, 0.0f, 5.0f, WHITE);
