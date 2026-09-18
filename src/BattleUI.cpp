@@ -35,6 +35,19 @@ BattleUI::BattleUI(){
     this->arrowLeft = LoadTexture("assets/BattleUI/arrow_left.png");
     this->middleFight = LoadTexture("assets/BattleUI/middle_fight.png");
     this->arrowRight = LoadTexture("assets/BattleUI/arrow_right.png");
+
+    //Numbers
+    this->numberOne = LoadTexture("assets/BattleUI//Numbers/lvl01.png");
+    this->numberTwo = LoadTexture("assets/BattleUI//Numbers/lvl02.png");
+    this->numberThree = LoadTexture("assets/BattleUI//Numbers/lvl03.png");
+    this->numberFour = LoadTexture("assets/BattleUI//Numbers/lvl04.png");
+    this->numberFive = LoadTexture("assets/BattleUI//Numbers/lvl05.png");
+    this->numberSix = LoadTexture("assets/BattleUI//Numbers/lvl06.png");
+    this->numberSeven = LoadTexture("assets/BattleUI//Numbers/lvl07.png");
+    this->numberEight = LoadTexture("assets/BattleUI//Numbers/lvl08.png");
+    this->numberNine = LoadTexture("assets/BattleUI//Numbers/lvl09.png");
+    this->numberTen = LoadTexture("assets/BattleUI//Numbers/lvl10.png");
+
 }
 
 void BattleUI::UpdateWeaponSelection(){
@@ -159,12 +172,13 @@ void BattleUI::DrawWeaponSelection(){
     Rectangle abilityTextFieldNoTextRec = {540.0f, 600.0f, static_cast<float>(this->abilityTextFieldNoText.width)* scale, static_cast<float>(this->abilityTextFieldNoText.height)*scale};
     Rectangle chooseWeaponBaseRec = {50.0f, 600.0f, static_cast<float>(this->noWeaponSelectedYet.width)*scale, static_cast<float>(this->noWeaponSelectedYet.height)*scale};
 
-    //DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
+    
     DrawTextureEx(this->playerSection, {110.0f, 550.0f}, 0.0f, 5.0f, WHITE);
-    DrawTextureEx(this->lvlIcon, {130.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+    DrawTextureEx(this->lvlIcon, {120.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+    // SAMPLE WHERE TO PLACE NUMBERS LATER
+    DrawTextureEx(this->numberTen, {180.0f, 562.0f}, 0.0f, 3.0f, WHITE);
     DrawTextureEx(this->hpIcon, {490.0f, 562.0f}, 0.0f, 3.0f, WHITE);
     DrawTextureEx(this->upperUI, {50.0f, 395.0f}, 0.0f, 5.0f, WHITE); 
-    //DrawTextureEx(this->returnDead, {975.0f, 550.0f}, 0.0f, 5.0f, WHITE); // Right zone
 
     switch(this->selectedWeapon){
         case WeaponSelection::None:{
@@ -368,8 +382,8 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
     const char* healthText = TextFormat("%.0f/%.0f", currentHealth, maxHealth);
     DrawTextEx(this->battleUIFont, healthText, {390.0f, 560.0f}, 30.0f, 1.0f, BLACK);
 
-    const char* levelText = TextFormat("%i", currentLevel); // "Lvl %i"
-    DrawTextEx(this->battleUIFont, levelText, {180.0f, 560.0f}, 30.0f, 1.0f, BLACK);
+/*     const char* levelText = TextFormat("%i", currentLevel); // "Lvl %i"
+    DrawTextEx(this->battleUIFont, levelText, {180.0f, 560.0f}, 30.0f, 1.0f, BLACK); */
 
     //DrawTextureEx(this->playerSectionXp, {110.f, 550.0f}, 0.0f, 5.0f, WHITE); // PLACED IN PLAYERUI
     DrawTextureEx(this->playerSectionXp, {540.f, 550.0f}, 0.0f, 5.0f, WHITE);
@@ -488,5 +502,18 @@ void BattleUI::Unload(){
     UnloadTexture(this->arrowLeft);
     UnloadTexture(this->middleFight);
     UnloadTexture(this->arrowRight);
+
+    //Numbers
+    UnloadTexture(this->numberOne);
+    UnloadTexture(this->numberTwo);
+    UnloadTexture(this->numberThree);
+    UnloadTexture(this->numberFour);
+    UnloadTexture(this->numberFive);
+    UnloadTexture(this->numberSix);
+    UnloadTexture(this->numberSeven);
+    UnloadTexture(this->numberEight);
+    UnloadTexture(this->numberNine);
+    UnloadTexture(this->numberTen);
+
 
 }

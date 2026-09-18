@@ -56,6 +56,18 @@ class BattleUI{
     Texture2D middleFight;
     Texture2D arrowRight;
 
+    // Numbers
+    Texture2D numberOne;
+    Texture2D numberTwo;
+    Texture2D numberThree;
+    Texture2D numberFour;
+    Texture2D numberFive;
+    Texture2D numberSix;
+    Texture2D numberSeven;
+    Texture2D numberEight;
+    Texture2D numberNine;
+    Texture2D numberTen;
+
     public:
     BattleUI();
 
