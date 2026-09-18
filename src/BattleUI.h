@@ -29,6 +29,7 @@ class BattleUI{
     Texture2D hpIcon;
     Texture2D playerSectionXp;
     Texture2D xpIcon;
+    Texture2D energySection;
     Texture2D playerBorderGreen;
     Texture2D healthBarBorder;
 

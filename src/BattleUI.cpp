@@ -25,6 +25,7 @@ BattleUI::BattleUI(){
     this->hpIcon = LoadTexture("assets/BattleUI/hp.png");
     this->playerSectionXp = LoadTexture("assets/BattleUI/player_section_xp.png");
     this->xpIcon = LoadTexture("assets/BattleUI/xp.png");
+    this->energySection = LoadTexture("assets/BattleUI/energy_section.png");
     this->playerBorderGreen = LoadTexture("assets/BattleUI/player_border_green.png");
     this->healthBarBorder = LoadTexture("assets/BattleUI/healthbar_border.png");
 
@@ -175,10 +176,10 @@ void BattleUI::DrawWeaponSelection(){
     
     DrawTextureEx(this->playerSection, {110.0f, 550.0f}, 0.0f, 5.0f, WHITE);
     DrawTextureEx(this->lvlIcon, {120.0f, 562.0f}, 0.0f, 3.0f, WHITE);
-    // SAMPLE WHERE TO PLACE NUMBERS LATER
-    //DrawTextureEx(this->numberTen, {180.0f, 562.0f}, 0.0f, 3.0f, WHITE);
+
     DrawTextureEx(this->hpIcon, {490.0f, 562.0f}, 0.0f, 3.0f, WHITE);
     DrawTextureEx(this->upperUI, {50.0f, 395.0f}, 0.0f, 5.0f, WHITE); 
+    DrawTextureEx(this->energySection, {1035.0f, 395.0f}, 0.0f, 5.0f, WHITE); 
 
     switch(this->selectedWeapon){
         case WeaponSelection::None:{
@@ -423,7 +424,7 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
 
     //DrawTextureEx(this->playerSectionXp, {110.f, 550.0f}, 0.0f, 5.0f, WHITE); // PLACED IN PLAYERUI
     DrawTextureEx(this->playerSectionXp, {540.f, 550.0f}, 0.0f, 5.0f, WHITE);
-    DrawTextureEx(this->xpIcon, {1010.0f, 585.0f}, 0.0f, 2.0f, WHITE);
+    DrawTextureEx(this->xpIcon, {990.0f, 575.0f}, 0.0f, 3.0f, WHITE);
     DrawRectangle(xpBarX, xpBarY, xpBarWidth * xpPercent, xpBarHeight, ORANGE);
 
     // Moved from DrawWeaponSelection due to draw order issues
@@ -517,6 +518,7 @@ void BattleUI::Unload(){
     UnloadTexture(this->hpIcon);
     UnloadTexture(this->playerSectionXp);
     UnloadTexture(this->xpIcon);
+    UnloadTexture(this->energySection);
     UnloadTexture(this->playerBorderGreen);
     UnloadTexture(this->healthBarBorder);
 
