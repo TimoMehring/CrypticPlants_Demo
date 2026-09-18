@@ -25,7 +25,7 @@ BattleUI::BattleUI(){
     this->playerBorderGreen = LoadTexture("assets/BattleUI/player_border_green.png");
     this->healthBarBorder = LoadTexture("assets/BattleUI/healthbar_border.png");
 
-
+    this->upperUI = LoadTexture("assets/BattleUI/upper_ui.png");
     this->chooseTargetPistolUI = LoadTexture("assets/BattleUI/ui_choosetarget_pistol.png");
     this->chooseTargetBoomerangUI = LoadTexture("assets/BattleUI/ui_choosetarget_boomerang.png");
     this->monsterBattleBackground = LoadTexture("assets/BattleUI/battle_monster_background.png");
@@ -158,6 +158,8 @@ void BattleUI::DrawWeaponSelection(){
 
     //DrawTextureEx(this->abilityTextFieldNoText, {540.0f, 600.0f}, 0.0f, 5.0f, WHITE);
     DrawTextureEx(this->playerSection, {110.0f, 550.0f}, 0.0f, 5.0f, WHITE);
+    DrawTextureEx(this->upperUI, {50.0f, 405.0f}, 0.0f, 5.0f, WHITE);
+    //DrawTextureEx(this->returnDead, {975.0f, 550.0f}, 0.0f, 5.0f, WHITE); // Right zone
 
     switch(this->selectedWeapon){
         case WeaponSelection::None:{
@@ -470,6 +472,7 @@ void BattleUI::Unload(){
     UnloadTexture(this->abilityBorderGreen);
     UnloadTexture(this->abilityTextFieldNoText);
 
+    UnloadTexture(this->upperUI);
     UnloadTexture(this->chooseTargetPistolUI);
     UnloadTexture(this->chooseTargetBoomerangUI);
     UnloadTexture(this->monsterBattleBackground);
