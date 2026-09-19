@@ -69,6 +69,20 @@ class BattleUI{
     Texture2D numberNine;
     Texture2D numberTen;
 
+    // Numbers (HP) For the Craft System for bigger numbers than 9 (>9)
+
+    Texture2D numberCraftingSystemZero;
+    Texture2D numberCraftingSystemOne;
+    Texture2D numberCraftingSystemTwo;
+    Texture2D numberCraftingSystemThree;
+    Texture2D numberCraftingSystemFour;
+    Texture2D numberCraftingSystemFive;
+    Texture2D numberCraftingSystemSix;
+    Texture2D numberCraftingSystemSeven;
+    Texture2D numberCraftingSystemEight;
+    Texture2D numberCraftingSystemNine;
+    Texture2D slashCraftingSystem;
+
     public:
     BattleUI();
 

@@ -37,7 +37,7 @@ BattleUI::BattleUI(){
     this->middleFight = LoadTexture("assets/BattleUI/middle_fight.png");
     this->arrowRight = LoadTexture("assets/BattleUI/arrow_right.png");
 
-    //Numbers
+    //Numbers level textures
     this->numberOne = LoadTexture("assets/BattleUI//Numbers/lvl01.png");
     this->numberTwo = LoadTexture("assets/BattleUI//Numbers/lvl02.png");
     this->numberThree = LoadTexture("assets/BattleUI//Numbers/lvl03.png");
@@ -48,6 +48,19 @@ BattleUI::BattleUI(){
     this->numberEight = LoadTexture("assets/BattleUI//Numbers/lvl08.png");
     this->numberNine = LoadTexture("assets/BattleUI//Numbers/lvl09.png");
     this->numberTen = LoadTexture("assets/BattleUI//Numbers/lvl10.png");
+
+    // Numbers (HP) For the Craft System for bigger numbers than 9 (>9)
+    this->numberCraftingSystemZero = LoadTexture("assets/BattleUI//NumbersCraftingSystem/lvl00.png");
+    this->numberCraftingSystemOne = LoadTexture("assets/BattleUI//NumbersCraftingSystem/lvl01.png");
+    this->numberCraftingSystemTwo = LoadTexture("assets/BattleUI//NumbersCraftingSystem/lvl02.png");
+    this->numberCraftingSystemThree = LoadTexture("assets/BattleUI//NumbersCraftingSystem/lvl03.png");
+    this->numberCraftingSystemFour = LoadTexture("assets/BattleUI//NumbersCraftingSystem/lvl04.png");
+    this->numberCraftingSystemFive = LoadTexture("assets/BattleUI//NumbersCraftingSystem/lvl05.png");
+    this->numberCraftingSystemSix = LoadTexture("assets/BattleUI//NumbersCraftingSystem/lvl06.png");
+    this->numberCraftingSystemSeven = LoadTexture("assets/BattleUI//NumbersCraftingSystem/lvl07.png");
+    this->numberCraftingSystemEight = LoadTexture("assets/BattleUI//NumbersCraftingSystem/lvl08.png");
+    this->numberCraftingSystemNine = LoadTexture("assets/BattleUI//NumbersCraftingSystem/lvl09.png");
+    this->slashCraftingSystem = LoadTexture("assets/BattleUI//NumbersCraftingSystem/slash.png");
 
 }
 
@@ -552,6 +565,19 @@ void BattleUI::Unload(){
     UnloadTexture(this->numberEight);
     UnloadTexture(this->numberNine);
     UnloadTexture(this->numberTen);
+
+    // Numbers (HP) For the Craft System for bigger numbers than 9 (>9)
+    UnloadTexture(this->numberCraftingSystemZero);
+    UnloadTexture(this->numberCraftingSystemOne);
+    UnloadTexture(this->numberCraftingSystemTwo);
+    UnloadTexture(this->numberCraftingSystemThree);
+    UnloadTexture(this->numberCraftingSystemFour);
+    UnloadTexture(this->numberCraftingSystemFive);
+    UnloadTexture(this->numberCraftingSystemSix);
+    UnloadTexture(this->numberCraftingSystemSeven);
+    UnloadTexture(this->numberCraftingSystemEight);
+    UnloadTexture(this->numberCraftingSystemNine);
+    UnloadTexture(this->slashCraftingSystem);
 
 
 }
