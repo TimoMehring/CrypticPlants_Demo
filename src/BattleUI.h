@@ -95,6 +95,7 @@ class BattleUI{
     void DrawBoomerangAbilities(const std::vector<BoomerangAbility>& abilities);
 
     void DrawPlayerUI(float currentHealth, float maxHealth, int currentLevel, float currentXp, float maxXp);
+    void DrawCraftingNumber(int number, float& x, float y, float scale);
     void DrawMonsterUI();
     void DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites, const std::vector<Texture2D>& boomerangBackSprites);
 

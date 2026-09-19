@@ -395,8 +395,20 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
     DrawTextureEx(this->healthBarBorder,{215.0f, 560.0f}, 0.0f, 5.0f, WHITE);  
     DrawRectangle(barX, barY, barWidth * healthPercent, barHeight, currentColor);
 
-    const char* healthText = TextFormat("%.0f/%.0f", currentHealth, maxHealth);
-    DrawTextEx(this->battleUIFont, healthText, {390.0f, 560.0f}, 30.0f, 1.0f, BLACK);
+    // HealthPoints
+    float hpNumberX = 0.0f;
+    float hpNumberY = 562.0f;
+    float hpNumberScale = 3.0f;
+
+    // Test Draw to confirm the Crafting System works
+    DrawTextureEx(this->numberCraftingSystemOne, {hpNumberX, hpNumberY}, 0.0f, hpNumberScale, WHITE);
+
+    hpNumberX += (this->numberCraftingSystemOne.width -1) * hpNumberScale;
+
+    DrawTextureEx(this->numberCraftingSystemTwo, {hpNumberX, hpNumberY}, 0.0f, hpNumberScale, WHITE);
+
+/*     const char* healthText = TextFormat("%.0f/%.0f", currentHealth, maxHealth);
+    DrawTextEx(this->battleUIFont, healthText, {390.0f, 560.0f}, 30.0f, 1.0f, BLACK); */
 
 /*     const char* levelText = TextFormat("%i", currentLevel); // "Lvl %i"
     DrawTextEx(this->battleUIFont, levelText, {180.0f, 560.0f}, 30.0f, 1.0f, BLACK); */ //due to tests for the numbers with own textures
@@ -476,6 +488,58 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
 
     }
 
+}
+
+void BattleUI::DrawCraftingNumber(int number, float& x, float y, float scale){
+    Texture2D* numberTexture = nullptr;
+
+    switch(number){
+        case 0:
+            numberTexture = &this->numberCraftingSystemZero;
+            break;
+
+        case 1:
+            numberTexture = &this->numberCraftingSystemOne;
+            break;
+
+        case 2:
+            numberTexture = &this->numberCraftingSystemTwo;
+            break;
+
+        case 3:
+            numberTexture = &this->numberCraftingSystemThree;
+            break;
+
+        case 4:
+            numberTexture = &this->numberCraftingSystemFour;
+            break;
+
+        case 5:
+            numberTexture = &this->numberCraftingSystemFive;
+            break;
+
+        case 6:
+            numberTexture = &this->numberCraftingSystemSix;
+            break;
+
+        case 7:
+            numberTexture = &this->numberCraftingSystemSeven;
+            break;
+
+        case 8:
+            numberTexture = &this->numberCraftingSystemEight;
+            break;
+
+        case 9:
+            numberTexture = &this->numberCraftingSystemNine;
+            break;
+    }
+
+    if(numberTexture != nullptr){
+        DrawTextureEx(*numberTexture, {x, y}, 0.0f, scale, WHITE);
+
+        x += (numberTexture->width - 1) * scale;
+    }
 }
 
 void BattleUI::DrawMonsterUI(){
