@@ -365,7 +365,7 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
     Rectangle playerSectionRec = {110.0f, 550.0f, static_cast<float>(playerSection.width)*scaleRec, static_cast<float>(playerSection.height)*scaleRec};
 
     // TESTING VALUES DELETE LATER
-    //currentHealth = 10.0f; // TO TEST HEALTH BAR COLOR CHANGE [DELETE LATER]
+    currentHealth = 83.0f; // TO TEST HEALTH BAR COLOR CHANGE [DELETE LATER]
     currentXp = 1000.0f;
     currentLevel = 9;
 
@@ -400,13 +400,23 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
     float hpNumberY = 562.0f;
     float hpNumberScale = 3.0f;
 
+    int currentHp = static_cast<int>(currentHealth);
+    int hundreds = (currentHp / 100) % 10;
+    int tens = (currentHp / 10) % 10;
+    int ones = currentHp % 10;
+
+    this->DrawCraftingNumber(hundreds, hpNumberX, hpNumberY, hpNumberScale);
+    this->DrawCraftingNumber(tens, hpNumberX, hpNumberY, hpNumberScale);
+    this->DrawCraftingNumber(ones, hpNumberX, hpNumberY, hpNumberScale);
+
     // Test Draw to confirm the Crafting System works
-    DrawTextureEx(this->numberCraftingSystemOne, {hpNumberX, hpNumberY}, 0.0f, hpNumberScale, WHITE);
+/*     DrawTextureEx(this->numberCraftingSystemOne, {hpNumberX, hpNumberY}, 0.0f, hpNumberScale, WHITE);
 
     hpNumberX += (this->numberCraftingSystemOne.width -1) * hpNumberScale;
 
-    DrawTextureEx(this->numberCraftingSystemTwo, {hpNumberX, hpNumberY}, 0.0f, hpNumberScale, WHITE);
+    DrawTextureEx(this->numberCraftingSystemTwo, {hpNumberX, hpNumberY}, 0.0f, hpNumberScale, WHITE); */
 
+    // OLD HP WITH FONT
 /*     const char* healthText = TextFormat("%.0f/%.0f", currentHealth, maxHealth);
     DrawTextEx(this->battleUIFont, healthText, {390.0f, 560.0f}, 30.0f, 1.0f, BLACK); */
 
