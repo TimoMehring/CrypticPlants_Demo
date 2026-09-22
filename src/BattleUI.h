@@ -56,6 +56,9 @@ class BattleUI{
     Texture2D arrowLeft;
     Texture2D middleFight;
     Texture2D arrowRight;
+    Texture2D arrowBorder;
+    Texture2D middleFightBorder;
+    int selectedTarget = 0;
 
     // Numbers
     Texture2D numberOne;

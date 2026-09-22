@@ -36,6 +36,8 @@ BattleUI::BattleUI(){
     this->arrowLeft = LoadTexture("assets/BattleUI/arrow_left.png");
     this->middleFight = LoadTexture("assets/BattleUI/middle_fight.png");
     this->arrowRight = LoadTexture("assets/BattleUI/arrow_right.png");
+    this->arrowBorder = LoadTexture("assets/BattleUI/arrow_border.png");
+    this->middleFightBorder = LoadTexture("assets/BattleUI/middle_fight_border.png");
 
     //Numbers level textures
     this->numberOne = LoadTexture("assets/BattleUI//Numbers/lvl01.png");
@@ -174,6 +176,30 @@ void BattleUI::UpdateWeaponSelection(){
             }
         }
         break;
+        
+        case WeaponSelection::ChooseTargetPistol:
+        case WeaponSelection::ChooseTargetBoomerang:{
+            Rectangle arrowLeftRec = {440.0f, 430.0f, static_cast<float>(this->arrowLeft.width)*scale, static_cast<float>(this->arrowLeft.height)*scale};
+            Rectangle arrowRightRec = {670.0f, 430.0f, static_cast<float>(this->arrowRight.width)*scale, static_cast<float>(this->arrowRight.height)*scale};
+            Rectangle middleFightRec = {510.0f, 420.0f, static_cast<float>(this->middleFight.width)*scale, static_cast<float>(this->middleFight.height)*scale};
+
+            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                if(CheckCollisionPointRec(mousePosition, arrowLeftRec)){
+                    this->selectedTarget--;
+                    // Go circle if limit is passed
+                }
+                else if(CheckCollisionPointRec(mousePosition, arrowRightRec)){
+                    this->selectedTarget++;
+                    // Go circle if limit is passed
+                }
+                else if(CheckCollisionPointRec(mousePosition, middleFightRec)){
+                    // Change Start & Start Fight resolution
+
+                }
+
+            }
+        }
+        break;
     }
 }
 
@@ -245,8 +271,24 @@ void BattleUI::DrawWeaponSelection(){
             if(CheckCollisionPointRec(mousePosition, returnArrowRec)){
                 DrawTextureEx(this->returnBorder,{50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
             }
-            break;
         }
+            break;
+        
+        case WeaponSelection::ChooseTargetPistol:
+        case WeaponSelection::ChooseTargetBoomerang:{
+/*             Rectangle arrowLeftRec = {440.0f, 430.0f, static_cast<float>(this->arrowLeft.width)*scale, static_cast<float>(this->arrowLeft.height)*scale};
+            Rectangle arrowRightRec = {670.0f, 430.0f, static_cast<float>(this->arrowRight.width)*scale, static_cast<float>(this->arrowRight.height)*scale};
+            Rectangle middleFightRec = {510.0f, 420.0f, static_cast<float>(this->middleFight.width)*scale, static_cast<float>(this->middleFight.height)*scale};
+            if(CheckCollisionPointRec(mousePosition, arrowLeftRec)){
+                DrawTextureEx(this->arrowBorder,{440.0f, 430.0f}, 0.0f, 5.0f, WHITE);
+            }
+            else if(CheckCollisionPointRec(mousePosition,arrowRightRec)){
+                DrawTextureEx(this->arrowBorder,{670.0f, 430.0f}, 0.0f, 5.0f, WHITE);
+            } */
+
+        }
+        break;
+
 
     }
 }
@@ -581,8 +623,8 @@ void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites,
         DrawTextureEx(this->returnDead, {50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->chooseTargetPistolUI, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->middleFight, {510.0f, 420.0f}, 0.0f, 5.0f, WHITE);
-        DrawTextureEx(this->arrowLeft, {440.0f, 420.0f}, 0.0f, 5.0f, WHITE);
-        DrawTextureEx(this->arrowRight, {580.0f, 420.0f}, 0.0f, 5.0f, WHITE);
+        DrawTextureEx(this->arrowLeft, {440.0f, 430.0f}, 0.0f, 5.0f, WHITE);
+        DrawTextureEx(this->arrowRight, {670.0f, 430.0f}, 0.0f, 5.0f, WHITE);
         if(abilityClicked == 0){
             DrawTextureEx(pistolBackSprites[this->abilityClicked], {650.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         }
@@ -592,6 +634,21 @@ void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites,
         else if(abilityClicked == 2){
             DrawTextureEx(pistolBackSprites[this->abilityClicked], {650.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         }
+
+    Vector2 mousePosition = GetMousePosition();
+    float scale = 5.0f;
+    Rectangle arrowLeftRec = {440.0f, 430.0f, static_cast<float>(this->arrowLeft.width)*scale, static_cast<float>(this->arrowLeft.height)*scale};
+    Rectangle arrowRightRec = {670.0f, 430.0f, static_cast<float>(this->arrowRight.width)*scale, static_cast<float>(this->arrowRight.height)*scale};
+    Rectangle middleFightRec = {510.0f, 420.0f, static_cast<float>(this->middleFight.width)*scale, static_cast<float>(this->middleFight.height)*scale};
+    if(CheckCollisionPointRec(mousePosition, arrowLeftRec)){
+        DrawTextureEx(this->arrowBorder,{440.0f, 430.0f}, 0.0f, 5.0f, WHITE);
+    }
+    else if(CheckCollisionPointRec(mousePosition,arrowRightRec)){
+        DrawTextureEx(this->arrowBorder,{670.0f, 430.0f}, 0.0f, 5.0f, WHITE);
+    }
+    else if(CheckCollisionPointRec(mousePosition,middleFightRec)){
+        DrawTextureEx(this->middleFightBorder,{510.0f, 420.0f}, 0.0f, 5.0f, WHITE);
+    }
     }
     else if(selectedWeapon == WeaponSelection::ChooseTargetBoomerang){
         DrawTextureEx(this->returnDead, {50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
@@ -647,6 +704,8 @@ void BattleUI::Unload(){
     UnloadTexture(this->arrowLeft);
     UnloadTexture(this->middleFight);
     UnloadTexture(this->arrowRight);
+    UnloadTexture(this->arrowBorder);
+    UnloadTexture(this->middleFightBorder);
 
     //Numbers
     UnloadTexture(this->numberOne);
