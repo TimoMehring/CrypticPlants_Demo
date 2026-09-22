@@ -398,8 +398,9 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
     // HealthPoints
     float hpNumberX = 390.0f;
     float hpNumberY = 565.0f;
-    float hpNumberScale = 2.0f;
+    float hpNumberScale = 2.5f;
 
+    // currentHP
     int currentHp = static_cast<int>(currentHealth);
     int hundreds = (currentHp / 100) % 10;
     int tens = (currentHp / 10) % 10;
@@ -413,6 +414,20 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
     this->DrawCraftingNumber(ones, hpNumberX, hpNumberY, hpNumberScale);
 
     DrawTextureEx(this->slashCraftingSystem, {hpNumberX, hpNumberY}, 0.0f, hpNumberScale, WHITE);
+
+    hpNumberX += (this->slashCraftingSystem.width - 1) * hpNumberScale;
+
+    // maxHP
+    int maxHP = static_cast<int>(maxHealth);
+    int maxHundreds = (maxHP / 100) % 10;
+    int maxTens = (maxHP / 10) % 10;
+    int maxOnes = maxHP % 10;
+
+    this->DrawCraftingNumber(maxHundreds, hpNumberX, hpNumberY, hpNumberScale);
+    this->DrawCraftingNumber(maxTens, hpNumberX, hpNumberY, hpNumberScale);
+    this->DrawCraftingNumber(maxOnes, hpNumberX, hpNumberY, hpNumberScale);
+
+
 
     // Test Draw to confirm the Crafting System works
 /*     DrawTextureEx(this->numberCraftingSystemOne, {hpNumberX, hpNumberY}, 0.0f, hpNumberScale, WHITE);
