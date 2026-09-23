@@ -44,7 +44,8 @@ void Battle::Draw(){
     if(currentMonster != nullptr){
         currentMonster->DrawFront({350.0f, 130.0f}, 8.0f);
     }
-    //currentMonster->DrawBack({300.0f, 300.0f}, 4.0f);
+    
+    this->battleUI.DrawWeakPoints(this->currentMonster->GetWeakPointSprites());
 }
 
 void Battle::Unload(){

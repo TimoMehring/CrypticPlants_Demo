@@ -665,6 +665,10 @@ void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites,
     }
 }
 
+void BattleUI::DrawWeakPoints(const std::vector<Texture2D>& weakPointSprites){
+    
+}
+
 void BattleUI::Unload(){
     UnloadFont(this->battleUIFont);
     UnloadTexture(this->noWeaponSelectedYet);

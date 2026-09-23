@@ -21,11 +21,15 @@ void Monster::DrawFront(Vector2 position, float scale){
     DrawTextureEx(this->frontSprite, position, 0.0f, scale, WHITE);
 }
 
+const std::vector<Texture2D>& Monster::GetWeakPointSprites() const{
+    return this->weakPointSprites;
+}
+
 
 void Monster::Unload(){
     UnloadTexture(this->frontSprite);
     UnloadTexture(this->backSprite);
-    
+
     for(Texture2D& weakPointSprite : this->weakPointSprites){
         UnloadTexture(weakPointSprite);
     }
