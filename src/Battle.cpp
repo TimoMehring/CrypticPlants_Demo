@@ -9,8 +9,8 @@ Battle::Battle(){
 }
 
 void Battle::LoadMonsterData(){
-    monsterData.push_back({"Plant001", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant001_front.png", "assets/MonsterSprites/plant001_back.png"});
-    monsterData.push_back({"Plant002", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant002_front.png", "assets/MonsterSprites/plant002_back.png"});
+    monsterData.push_back({"Plant001", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant001_front.png", "assets/MonsterSprites/plant001_back.png", {"assets/WeakPoints/plant001MinusOne.png", "assets/WeakPoints/plant001PlusOne.png"}});
+    monsterData.push_back({"Plant002", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant002_front.png", "assets/MonsterSprites/plant002_back.png", {"assets/WeakPoints/plant001MinusOne.png", "assets/WeakPoints/plant001PlusOne.png"}});
 }
 
 void Battle::StartTestEncounter(){
@@ -23,7 +23,7 @@ void Battle::StartTestEncounter(){
 
 
     MonsterData& data = monsterData[randomIndex];
-    currentMonster = new Monster(data.name, data.range, data.speed, data.health, data.resistance, data.attack, data.frontSpritePath, data.backSpritePath);
+    currentMonster = new Monster(data.name, data.range, data.speed, data.health, data.resistance, data.attack, data.frontSpritePath, data.backSpritePath, data.weakPointSpritePaths);
 }
 
 void Battle::Update(){

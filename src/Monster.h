@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include <string>
+#include <vector>
 
 struct MonsterData{
     std::string name;
@@ -13,6 +14,8 @@ struct MonsterData{
 
     const char* frontSpritePath;
     const char* backSpritePath;
+
+    std::vector<const char*> weakPointSpritePaths;
 };
 
 class Monster{
@@ -29,8 +32,10 @@ class Monster{
     float resistance;
     float attack;
 
+    std::vector<Texture2D> weakPointSprites;
+
     public:
-    Monster(const std::string& name, float range, float speed, float health, float resistance, float attack, const char* frontSpritePath, const char* backSpritePath);
+    Monster(const std::string& name, float range, float speed, float health, float resistance, float attack, const char* frontSpritePath, const char* backSpritePath, const std::vector<const char*>& weakPointSpritePaths);
 
     // Drawing
     void DrawFront(Vector2 position, float scale);
