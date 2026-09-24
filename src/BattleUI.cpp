@@ -38,6 +38,7 @@ BattleUI::BattleUI(){
     this->arrowRight = LoadTexture("assets/BattleUI/arrow_right.png");
     this->arrowBorder = LoadTexture("assets/BattleUI/arrow_border.png");
     this->middleFightBorder = LoadTexture("assets/BattleUI/middle_fight_border.png");
+    this->targetArrow = LoadTexture("assets/WeakPoints/targetArrow.png");
 
     //Numbers level textures
     this->numberOne = LoadTexture("assets/BattleUI//Numbers/lvl01.png");
@@ -666,7 +667,17 @@ void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites,
 }
 
 void BattleUI::DrawWeakPoints(const std::vector<Texture2D>& weakPointSprites){
-    
+    if(this->selectedWeapon == WeaponSelection::ChooseTargetPistol || this->selectedWeapon == WeaponSelection::ChooseTargetBoomerang){
+        if(this->selectedTarget == -1){
+            DrawTextureEx(weakPointSprites[0], {350.0f, 130.0f}, 0.0f, 8.0f, WHITE);
+        }
+        else if(this->selectedTarget == 1){
+            DrawTextureEx(weakPointSprites[1], {350.0f, 130.0f}, 0.0f, 8.0f, WHITE);
+        }
+        else if(this->selectedTarget == 0){
+            DrawTextureEx(this->targetArrow, {350.0f, 50.0f}, 0.0f, 8.0f, WHITE);
+        }
+    }
 }
 
 void BattleUI::Unload(){
@@ -710,6 +721,7 @@ void BattleUI::Unload(){
     UnloadTexture(this->arrowRight);
     UnloadTexture(this->arrowBorder);
     UnloadTexture(this->middleFightBorder);
+    UnloadTexture(this->targetArrow);
 
     //Numbers
     UnloadTexture(this->numberOne);
