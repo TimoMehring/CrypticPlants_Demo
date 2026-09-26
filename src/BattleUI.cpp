@@ -666,7 +666,7 @@ void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites,
     }
 }
 
-void BattleUI::DrawWeakPoints(const std::vector<Texture2D>& weakPointSprites){
+void BattleUI::DrawWeakPoints(const std::vector<Texture2D>& weakPointSprites,const Vector2& targetArrowPosition){
     if(this->selectedWeapon == WeaponSelection::ChooseTargetPistol || this->selectedWeapon == WeaponSelection::ChooseTargetBoomerang){
         if(this->selectedTarget == -1){
             DrawTextureEx(weakPointSprites[0], {350.0f, 130.0f}, 0.0f, 8.0f, WHITE);
@@ -675,7 +675,7 @@ void BattleUI::DrawWeakPoints(const std::vector<Texture2D>& weakPointSprites){
             DrawTextureEx(weakPointSprites[1], {350.0f, 130.0f}, 0.0f, 8.0f, WHITE);
         }
         else if(this->selectedTarget == 0){
-            DrawTextureEx(this->targetArrow, {350.0f, 50.0f}, 0.0f, 8.0f, WHITE);
+            DrawTextureEx(this->targetArrow, targetArrowPosition, 0.0f, 8.0f, WHITE);
         }
     }
 }

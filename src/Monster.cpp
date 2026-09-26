@@ -1,6 +1,6 @@
 #include "Monster.h"
 
-Monster::Monster(const std::string& name, float range, float speed, float health, float resistance, float attack, const char* frontSpritePath, const char* backSpritePath, const std::vector<const char*>& weakPointSpritePaths){
+Monster::Monster(const std::string& name, float range, float speed, float health, float resistance, float attack, const char* frontSpritePath, const char* backSpritePath, const std::vector<const char*>& weakPointSpritePaths,const Vector2& targetArrowPosition){
     this->name = name;
 
     this->range = range;
@@ -15,6 +15,7 @@ Monster::Monster(const std::string& name, float range, float speed, float health
     for(const char* path : weakPointSpritePaths){
         this->weakPointSprites.push_back(LoadTexture(path));
     }
+    this->targetArrowPosition = targetArrowPosition;
 }
 
 void Monster::DrawFront(Vector2 position, float scale){
@@ -23,6 +24,10 @@ void Monster::DrawFront(Vector2 position, float scale){
 
 const std::vector<Texture2D>& Monster::GetWeakPointSprites() const{
     return this->weakPointSprites;
+}
+
+const Vector2& Monster::GetTargetArrowPosition() const{
+    return this->targetArrowPosition;
 }
 
 

@@ -102,7 +102,7 @@ class BattleUI{
     void DrawCraftingNumber(int number, float& x, float y, float scale);
     void DrawMonsterUI();
     void DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites, const std::vector<Texture2D>& boomerangBackSprites);
-    void DrawWeakPoints(const std::vector<Texture2D>& weakPointSprites);
+    void DrawWeakPoints(const std::vector<Texture2D>& weakPointSprites,const Vector2& targetArrowPosition);
     void Unload();
 
 };

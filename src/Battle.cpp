@@ -9,8 +9,8 @@ Battle::Battle(){
 }
 
 void Battle::LoadMonsterData(){
-    monsterData.push_back({"Plant001", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant001_front.png", "assets/MonsterSprites/plant001_back.png", {"assets/WeakPoints/plant001MinusOne.png", "assets/WeakPoints/plant001PlusOne.png"}});
-    monsterData.push_back({"Plant002", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant002_front.png", "assets/MonsterSprites/plant002_back.png", {"assets/WeakPoints/plant001MinusOne.png", "assets/WeakPoints/plant001PlusOne.png"}});
+    monsterData.push_back({"Plant001", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant001_front.png", "assets/MonsterSprites/plant001_back.png", {"assets/WeakPoints/plant001MinusOne.png", "assets/WeakPoints/plant001PlusOne.png"},{350.0f, 50.0f}});
+    monsterData.push_back({"Plant002", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant002_front.png", "assets/MonsterSprites/plant002_back.png", {"assets/WeakPoints/plant001MinusOne.png", "assets/WeakPoints/plant001PlusOne.png"},{350.0f, 50.0f}});
 }
 
 void Battle::StartTestEncounter(){
@@ -23,7 +23,7 @@ void Battle::StartTestEncounter(){
 
 
     MonsterData& data = monsterData[randomIndex];
-    currentMonster = new Monster(data.name, data.range, data.speed, data.health, data.resistance, data.attack, data.frontSpritePath, data.backSpritePath, data.weakPointSpritePaths);
+    currentMonster = new Monster(data.name, data.range, data.speed, data.health, data.resistance, data.attack, data.frontSpritePath, data.backSpritePath, data.weakPointSpritePaths, data.targetArrowPosition);
 }
 
 void Battle::Update(){
@@ -45,7 +45,7 @@ void Battle::Draw(){
         currentMonster->DrawFront({350.0f, 130.0f}, 8.0f);
     }
     
-    this->battleUI.DrawWeakPoints(this->currentMonster->GetWeakPointSprites());
+    this->battleUI.DrawWeakPoints(this->currentMonster->GetWeakPointSprites(), this->currentMonster->GetTargetArrowPosition());
 }
 
 void Battle::Unload(){
