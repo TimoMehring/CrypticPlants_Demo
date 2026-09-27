@@ -188,10 +188,16 @@ void BattleUI::UpdateWeaponSelection(){
                 if(CheckCollisionPointRec(mousePosition, arrowLeftRec)){
                     this->selectedTarget--;
                     // Go circle if limit is passed
+                if(selectedTarget <= -2){
+                    selectedTarget = 1;
+                }
                 }
                 else if(CheckCollisionPointRec(mousePosition, arrowRightRec)){
                     this->selectedTarget++;
                     // Go circle if limit is passed
+                if(selectedTarget >= 2){
+                    selectedTarget = -1;
+                }
                 }
                 else if(CheckCollisionPointRec(mousePosition, middleFightRec)){
                     // Change Start & Start Fight resolution
