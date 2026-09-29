@@ -28,7 +28,7 @@ void Battle::StartTestEncounter(){
 
 void Battle::Update(){
     battleUI.UpdateWeaponSelection();
-    battleUI.UpdateFight();
+    battleUI.UpdateFight(this->pistol.GetRange(), this->pistol.GetSpeed(), this->boomerang.GetRange(), this->boomerang.GetSpeed(), this->currentMonster->GetRange(), this->currentMonster->GetSpeed());
     if(IsKeyPressed(KEY_ENTER)){
         StartTestEncounter();
     }
@@ -41,6 +41,7 @@ void Battle::Draw(){
     battleUI.DrawMonsterUI();
     battleUI.DrawChooseTarget(this->pistol.GetAbilityBackSprite(), this->boomerang.GetAbilityBackSprite());
     battleUI.DrawPlayerUI(this->player.GetCurrentHealth(), this->player.GetMaxHealth(), this->player.GetLevel(), this->player.GetCurrentXp(), this->player.GetMaxXP());
+    //battleUI.UpdateFight(this->pistol.GetRange(), this->pistol.GetSpeed(), this->boomerang.GetRange(), this->boomerang.GetSpeed(), this->currentMonster->GetRange(), this->currentMonster->GetSpeed());
     battleUI.DrawChooseTarget(this->pistol.GetAbilityBackSprite(), this->boomerang.GetAbilityBackSprite());
     if(currentMonster != nullptr){
         currentMonster->DrawFront({350.0f, 130.0f}, 8.0f);

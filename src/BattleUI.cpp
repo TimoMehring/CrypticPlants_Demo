@@ -690,7 +690,7 @@ void BattleUI::StartFight(){
     this->currentFightState = FightState::CheckFirst;
 }
 // 
-void BattleUI::CheckFirst(){
+void BattleUI::CheckFirst(float pistolRange, float pistolSpeed, float boomerangRange, float boomerangSpeed,    float monsterRange, float monsterSpeed){
     //selectedWeapon = WeaponSelection::None;
     //this->currentFightState = FightState::EnemyFirst;
 }
@@ -711,14 +711,14 @@ void BattleUI::PlayerAttack(){
 
 }
 
-void BattleUI::UpdateFight(){
+void BattleUI::UpdateFight(float pistolRange, float pistolSpeed, float boomerangRange, float boomerangSpeed,    float monsterRange, float monsterSpeed){
     switch(this->currentFightState){
         case FightState::None:{
 
         }
         break;
         case FightState::CheckFirst:{
-            this->CheckFirst();
+            this->CheckFirst(pistolRange, pistolSpeed, boomerangRange, boomerangSpeed, monsterRange, monsterSpeed);
         }
         break;
         case FightState::EnemyFirst:{
