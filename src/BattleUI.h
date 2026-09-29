@@ -18,8 +18,8 @@ enum class FightState{
     CheckFirst,
     EnemyFirst,
     PlayerFirst,
-    EnemyAttack,
-    PlayerAttack
+    EnemySecond,
+    PlayerSecond
 };
 
 class BattleUI{
@@ -118,8 +118,8 @@ class BattleUI{
     void CheckFirst(float pistolRange, float pistolSpeed, float boomerangRange, float boomerangSpeed,    float monsterRange, float monsterSpeed);
     void EnemyFirst();
     void PlayerFirst();
-    void EnemyAttack();
-    void PlayerAttack();
+    void EnemySecond();
+    void PlayerSecond();
     void UpdateFight(float pistolRange, float pistolSpeed, float boomerangRange, float boomerangSpeed,    float monsterRange, float monsterSpeed);
     void Unload();
 

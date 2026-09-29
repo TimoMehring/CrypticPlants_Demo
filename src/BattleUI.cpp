@@ -691,8 +691,26 @@ void BattleUI::StartFight(){
 }
 // 
 void BattleUI::CheckFirst(float pistolRange, float pistolSpeed, float boomerangRange, float boomerangSpeed,    float monsterRange, float monsterSpeed){
-    //selectedWeapon = WeaponSelection::None;
-    //this->currentFightState = FightState::EnemyFirst;
+    float playerInitiative = 0.0f;
+    float monsterInitiative = (monsterSpeed * 2.0f) + monsterRange;
+
+    if(this->selectedWeapon == WeaponSelection::ChooseAttackPistol){
+        playerInitiative = (pistolSpeed * 2.0f) + pistolRange;
+    }
+    else if(this->selectedWeapon == WeaponSelection::ChooseTargetBoomerang){
+        playerInitiative = (boomerangSpeed * 2.0f) + boomerangRange;
+    }
+
+    if(monsterInitiative > playerInitiative){
+        this->currentFightState = FightState::EnemyFirst;
+    }
+    else if(playerInitiative > monsterInitiative){
+        this->currentFightState = FightState::PlayerFirst;
+    }
+    else{
+        // provisionally to cover tie between (playerInitiative & monsterInitiative)
+        this->currentFightState = FightState::PlayerFirst;
+    }
 }
 
 void BattleUI::EnemyFirst(){
@@ -703,11 +721,11 @@ void BattleUI::PlayerFirst(){
 
 }
 
-void BattleUI::EnemyAttack(){
+void BattleUI::EnemySecond(){
 
 }
 
-void BattleUI::PlayerAttack(){
+void BattleUI::PlayerSecond(){
 
 }
 
@@ -729,12 +747,12 @@ void BattleUI::UpdateFight(float pistolRange, float pistolSpeed, float boomerang
             this->PlayerFirst();
         }
         break;
-        case FightState::EnemyAttack:{
-            this->EnemyAttack();
+        case FightState::EnemySecond:{
+            this->EnemySecond();
         }
         break;
-        case FightState::PlayerAttack:{
-            this->PlayerAttack();
+        case FightState::PlayerSecond:{
+            this->PlayerSecond();
         }
         break;
     }
