@@ -115,6 +115,11 @@ class BattleUI{
     void DrawWeakPoints(const std::vector<Texture2D>& weakPointSprites,const Vector2& targetArrowPosition);
 
     void StartFight();
+    void CheckFirst();
+    void EnemyFirst();
+    void PlayerFirst();
+    void EnemyAttack();
+    void PlayerAttack();
     void UpdateFight();
     void Unload();
 

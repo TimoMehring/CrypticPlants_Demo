@@ -690,19 +690,51 @@ void BattleUI::StartFight(){
     this->currentFightState = FightState::CheckFirst;
 }
 
+void BattleUI::CheckFirst(){
+
+}
+
+void BattleUI::EnemyFirst(){
+
+}
+
+void BattleUI::PlayerFirst(){
+
+}
+
+void BattleUI::EnemyAttack(){
+
+}
+
+void BattleUI::PlayerAttack(){
+
+}
+
 void BattleUI::UpdateFight(){
     switch(this->currentFightState){
-        case FightState::None:
+        case FightState::None:{
+            
+        }
         break;
-        case FightState::CheckFirst:
+        case FightState::CheckFirst:{
+            this->CheckFirst();
+        }
         break;
-        case FightState::EnemyFirst:
+        case FightState::EnemyFirst:{
+            this->EnemyFirst();
+        }
         break;
-        case FightState::PlayerFirst:
+        case FightState::PlayerFirst:{
+            this->PlayerFirst();
+        }
         break;
-        case FightState::EnemyAttack:
+        case FightState::EnemyAttack:{
+            this->EnemyAttack();
+        }
         break;
-        case FightState::PlayerAttack:
+        case FightState::PlayerAttack:{
+            this->PlayerAttack();
+        }
         break;
     }
 
