@@ -30,6 +30,14 @@ const std::vector<Texture2D>& Pistol::GetAbilityBackSprite(){
     return this->abilityBackSprites;
 }
 
+float Pistol::GetRange() const{
+    return this->range;
+}
+
+float Pistol::GetSpeed() const{
+    return this->speed;
+}
+
 void Pistol::Unload(){
     for(Texture2D texture : this->abilityBackSprites){
         UnloadTexture(texture);

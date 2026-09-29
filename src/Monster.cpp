@@ -30,6 +30,13 @@ const Vector2& Monster::GetTargetArrowPosition() const{
     return this->targetArrowPosition;
 }
 
+float Monster::GetRange() const{
+    return this->range;
+}
+
+float Monster::GetSpeed() const{
+    return this->speed;
+}
 
 void Monster::Unload(){
     UnloadTexture(this->frontSprite);

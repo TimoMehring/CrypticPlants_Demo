@@ -30,6 +30,13 @@ const std::vector<Texture2D>& Boomerang::GetAbilityBackSprite(){
     return this->abilityBackSprites;
 }
 
+float Boomerang::GetRange() const{
+    return this->range;
+}
+
+float Boomerang::GetSpeed() const{
+    return this->speed;
+}
 void Boomerang::Unload(){
     for(Texture2D texture : this->abilityBackSprites){
         UnloadTexture(texture);

@@ -689,9 +689,10 @@ void BattleUI::DrawWeakPoints(const std::vector<Texture2D>& weakPointSprites,con
 void BattleUI::StartFight(){
     this->currentFightState = FightState::CheckFirst;
 }
-
+// 
 void BattleUI::CheckFirst(){
-
+    //selectedWeapon = WeaponSelection::None;
+    //this->currentFightState = FightState::EnemyFirst;
 }
 
 void BattleUI::EnemyFirst(){
@@ -713,7 +714,7 @@ void BattleUI::PlayerAttack(){
 void BattleUI::UpdateFight(){
     switch(this->currentFightState){
         case FightState::None:{
-            
+
         }
         break;
         case FightState::CheckFirst:{

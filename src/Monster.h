@@ -46,5 +46,8 @@ class Monster{
     const std::vector<Texture2D>& GetWeakPointSprites() const;
     const Vector2& GetTargetArrowPosition() const;
 
+    float GetRange() const;
+    float GetSpeed() const;
+
     void Unload();
 };

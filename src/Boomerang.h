@@ -36,5 +36,8 @@ class Boomerang{
     const std::vector<BoomerangAbility>& GetAbilities();
     const std::vector<Texture2D>& GetAbilityBackSprite();
 
+    float GetRange() const;
+    float GetSpeed() const;
+    
     void Unload();
 };
