@@ -28,6 +28,7 @@ void Battle::StartTestEncounter(){
 
 void Battle::Update(){
     battleUI.UpdateWeaponSelection();
+    battleUI.UpdateFight();
     if(IsKeyPressed(KEY_ENTER)){
         StartTestEncounter();
     }

@@ -13,6 +13,15 @@ enum class WeaponSelection{
     ChooseTargetBoomerang
 };
 
+enum class FightState{
+    None,
+    CheckFirst,
+    EnemyFirst,
+    PlayerFirst,
+    EnemyAttack,
+    PlayerAttack
+};
+
 class BattleUI{
     private:
     Texture2D noWeaponSelectedYet;
@@ -60,6 +69,7 @@ class BattleUI{
     Texture2D middleFightBorder;
     int selectedTarget = 0;
     Texture2D targetArrow;
+    FightState currentFightState = FightState::None;
 
     // Numbers
     Texture2D numberOne;
@@ -103,6 +113,9 @@ class BattleUI{
     void DrawMonsterUI();
     void DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites, const std::vector<Texture2D>& boomerangBackSprites);
     void DrawWeakPoints(const std::vector<Texture2D>& weakPointSprites,const Vector2& targetArrowPosition);
+
+    void StartFight();
+    void UpdateFight();
     void Unload();
 
 };

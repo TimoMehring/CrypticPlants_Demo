@@ -200,7 +200,7 @@ void BattleUI::UpdateWeaponSelection(){
                 }
                 }
                 else if(CheckCollisionPointRec(mousePosition, middleFightRec)){
-                    // Change Start & Start Fight resolution
+                    this->StartFight();
 
                 }
 
@@ -684,6 +684,28 @@ void BattleUI::DrawWeakPoints(const std::vector<Texture2D>& weakPointSprites,con
             DrawTextureEx(this->targetArrow, targetArrowPosition, 0.0f, 8.0f, WHITE);
         }
     }
+}
+
+void BattleUI::StartFight(){
+    this->currentFightState = FightState::CheckFirst;
+}
+
+void BattleUI::UpdateFight(){
+    switch(this->currentFightState){
+        case FightState::None:
+        break;
+        case FightState::CheckFirst:
+        break;
+        case FightState::EnemyFirst:
+        break;
+        case FightState::PlayerFirst:
+        break;
+        case FightState::EnemyAttack:
+        break;
+        case FightState::PlayerAttack:
+        break;
+    }
+
 }
 
 void BattleUI::Unload(){
