@@ -184,26 +184,26 @@ void BattleUI::UpdateWeaponSelection(){
             Rectangle arrowRightRec = {670.0f, 430.0f, static_cast<float>(this->arrowRight.width)*scale, static_cast<float>(this->arrowRight.height)*scale};
             Rectangle middleFightRec = {510.0f, 420.0f, static_cast<float>(this->middleFight.width)*scale, static_cast<float>(this->middleFight.height)*scale};
 
-            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-                if(CheckCollisionPointRec(mousePosition, arrowLeftRec)){
-                    this->selectedTarget--;
-                    // Go circle if limit is passed
-                if(selectedTarget <= -2){
-                    selectedTarget = 1;
+            if(this->currentFightState == FightState::None){
+                if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                    if(CheckCollisionPointRec(mousePosition, arrowLeftRec)){
+                        this->selectedTarget--;
+                        // Go circle if limit is passed
+                        if(selectedTarget <= -2){
+                            selectedTarget = 1;
+                        }
+                    }
+                    else if(CheckCollisionPointRec(mousePosition, arrowRightRec)){
+                        this->selectedTarget++;
+                        // Go circle if limit is passed
+                        if(selectedTarget >= 2){
+                            selectedTarget = -1;
+                        }
+                    }
+                    else if(CheckCollisionPointRec(mousePosition, middleFightRec)){
+                        this->StartFight();
+                    }
                 }
-                }
-                else if(CheckCollisionPointRec(mousePosition, arrowRightRec)){
-                    this->selectedTarget++;
-                    // Go circle if limit is passed
-                if(selectedTarget >= 2){
-                    selectedTarget = -1;
-                }
-                }
-                else if(CheckCollisionPointRec(mousePosition, middleFightRec)){
-                    this->StartFight();
-
-                }
-
             }
         }
         break;
@@ -283,15 +283,6 @@ void BattleUI::DrawWeaponSelection(){
         
         case WeaponSelection::ChooseTargetPistol:
         case WeaponSelection::ChooseTargetBoomerang:{
-/*             Rectangle arrowLeftRec = {440.0f, 430.0f, static_cast<float>(this->arrowLeft.width)*scale, static_cast<float>(this->arrowLeft.height)*scale};
-            Rectangle arrowRightRec = {670.0f, 430.0f, static_cast<float>(this->arrowRight.width)*scale, static_cast<float>(this->arrowRight.height)*scale};
-            Rectangle middleFightRec = {510.0f, 420.0f, static_cast<float>(this->middleFight.width)*scale, static_cast<float>(this->middleFight.height)*scale};
-            if(CheckCollisionPointRec(mousePosition, arrowLeftRec)){
-                DrawTextureEx(this->arrowBorder,{440.0f, 430.0f}, 0.0f, 5.0f, WHITE);
-            }
-            else if(CheckCollisionPointRec(mousePosition,arrowRightRec)){
-                DrawTextureEx(this->arrowBorder,{670.0f, 430.0f}, 0.0f, 5.0f, WHITE);
-            } */
 
         }
         break;
@@ -455,9 +446,6 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
     int tens = (currentHp / 10) % 10;
     int ones = currentHp % 10;
 
-/*     if(currentHealth >= 100){
-        this->DrawCraftingNumber(hundreds, hpNumberX, hpNumberY, hpNumberScale);
-    } */
     this->DrawCraftingNumber(hundreds, hpNumberX, hpNumberY, hpNumberScale);
     this->DrawCraftingNumber(tens, hpNumberX, hpNumberY, hpNumberScale);
     this->DrawCraftingNumber(ones, hpNumberX, hpNumberY, hpNumberScale);
@@ -475,22 +463,6 @@ void BattleUI::DrawPlayerUI(float currentHealth, float maxHealth, int currentLev
     this->DrawCraftingNumber(maxHundreds, hpNumberX, hpNumberY, hpNumberScale);
     this->DrawCraftingNumber(maxTens, hpNumberX, hpNumberY, hpNumberScale);
     this->DrawCraftingNumber(maxOnes, hpNumberX, hpNumberY, hpNumberScale);
-
-
-
-    // Test Draw to confirm the Crafting System works
-/*     DrawTextureEx(this->numberCraftingSystemOne, {hpNumberX, hpNumberY}, 0.0f, hpNumberScale, WHITE);
-
-    hpNumberX += (this->numberCraftingSystemOne.width -1) * hpNumberScale;
-
-    DrawTextureEx(this->numberCraftingSystemTwo, {hpNumberX, hpNumberY}, 0.0f, hpNumberScale, WHITE); */
-
-    // OLD HP WITH FONT
-/*     const char* healthText = TextFormat("%.0f/%.0f", currentHealth, maxHealth);
-    DrawTextEx(this->battleUIFont, healthText, {390.0f, 560.0f}, 30.0f, 1.0f, BLACK); */
-
-/*     const char* levelText = TextFormat("%i", currentLevel); // "Lvl %i"
-    DrawTextEx(this->battleUIFont, levelText, {180.0f, 560.0f}, 30.0f, 1.0f, BLACK); */ //due to tests for the numbers with own textures
 
     switch(currentLevel){
         case 1:
@@ -627,11 +599,29 @@ void BattleUI::DrawMonsterUI(){
 
 void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites, const std::vector<Texture2D>& boomerangBackSprites){
     if(selectedWeapon == WeaponSelection::ChooseTargetPistol){
+        if(this->currentFightState == FightState::None){
+            DrawTextureEx(this->middleFight, {510.0f, 420.0f}, 0.0f, 5.0f, WHITE);
+            DrawTextureEx(this->arrowLeft, {440.0f, 430.0f}, 0.0f, 5.0f, WHITE);
+            DrawTextureEx(this->arrowRight, {670.0f, 430.0f}, 0.0f, 5.0f, WHITE);
+
+            Vector2 mousePosition = GetMousePosition();
+            float scale = 5.0f;
+            Rectangle arrowLeftRec = {440.0f, 430.0f, static_cast<float>(this->arrowLeft.width)*scale, static_cast<float>(this->arrowLeft.height)*scale};
+            Rectangle arrowRightRec = {670.0f, 430.0f, static_cast<float>(this->arrowRight.width)*scale, static_cast<float>(this->arrowRight.height)*scale};
+            Rectangle middleFightRec = {510.0f, 420.0f, static_cast<float>(this->middleFight.width)*scale, static_cast<float>(this->middleFight.height)*scale};
+            
+            if(CheckCollisionPointRec(mousePosition, arrowLeftRec)){
+                DrawTextureEx(this->arrowBorder,{440.0f, 430.0f}, 0.0f, 5.0f, WHITE);
+            }
+            else if(CheckCollisionPointRec(mousePosition,arrowRightRec)){
+                DrawTextureEx(this->arrowBorder,{670.0f, 430.0f}, 0.0f, 5.0f, WHITE);
+            }
+            else if(CheckCollisionPointRec(mousePosition,middleFightRec)){
+                DrawTextureEx(this->middleFightBorder,{510.0f, 420.0f}, 0.0f, 5.0f, WHITE);
+            }
+        }
         DrawTextureEx(this->returnDead, {50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->chooseTargetPistolUI, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
-        DrawTextureEx(this->middleFight, {510.0f, 420.0f}, 0.0f, 5.0f, WHITE);
-        DrawTextureEx(this->arrowLeft, {440.0f, 430.0f}, 0.0f, 5.0f, WHITE);
-        DrawTextureEx(this->arrowRight, {670.0f, 430.0f}, 0.0f, 5.0f, WHITE);
         if(abilityClicked == 0){
             DrawTextureEx(pistolBackSprites[this->abilityClicked], {650.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         }
@@ -642,22 +632,29 @@ void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites,
             DrawTextureEx(pistolBackSprites[this->abilityClicked], {650.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         }
 
-    Vector2 mousePosition = GetMousePosition();
-    float scale = 5.0f;
-    Rectangle arrowLeftRec = {440.0f, 430.0f, static_cast<float>(this->arrowLeft.width)*scale, static_cast<float>(this->arrowLeft.height)*scale};
-    Rectangle arrowRightRec = {670.0f, 430.0f, static_cast<float>(this->arrowRight.width)*scale, static_cast<float>(this->arrowRight.height)*scale};
-    Rectangle middleFightRec = {510.0f, 420.0f, static_cast<float>(this->middleFight.width)*scale, static_cast<float>(this->middleFight.height)*scale};
-    if(CheckCollisionPointRec(mousePosition, arrowLeftRec)){
-        DrawTextureEx(this->arrowBorder,{440.0f, 430.0f}, 0.0f, 5.0f, WHITE);
-    }
-    else if(CheckCollisionPointRec(mousePosition,arrowRightRec)){
-        DrawTextureEx(this->arrowBorder,{670.0f, 430.0f}, 0.0f, 5.0f, WHITE);
-    }
-    else if(CheckCollisionPointRec(mousePosition,middleFightRec)){
-        DrawTextureEx(this->middleFightBorder,{510.0f, 420.0f}, 0.0f, 5.0f, WHITE);
-    }
     }
     else if(selectedWeapon == WeaponSelection::ChooseTargetBoomerang){
+        if(this->currentFightState == FightState::None){
+            DrawTextureEx(this->middleFight, {510.0f, 420.0f}, 0.0f, 5.0f, WHITE);
+            DrawTextureEx(this->arrowLeft, {440.0f, 430.0f}, 0.0f, 5.0f, WHITE);
+            DrawTextureEx(this->arrowRight, {670.0f, 430.0f}, 0.0f, 5.0f, WHITE);
+
+            Vector2 mousePosition = GetMousePosition();
+            float scale = 5.0f;
+            Rectangle arrowLeftRec = {440.0f, 430.0f, static_cast<float>(this->arrowLeft.width)*scale, static_cast<float>(this->arrowLeft.height)*scale};
+            Rectangle arrowRightRec = {670.0f, 430.0f, static_cast<float>(this->arrowRight.width)*scale, static_cast<float>(this->arrowRight.height)*scale};
+            Rectangle middleFightRec = {510.0f, 420.0f, static_cast<float>(this->middleFight.width)*scale, static_cast<float>(this->middleFight.height)*scale};
+            
+            if(CheckCollisionPointRec(mousePosition, arrowLeftRec)){
+                DrawTextureEx(this->arrowBorder,{440.0f, 430.0f}, 0.0f, 5.0f, WHITE);
+            }
+            else if(CheckCollisionPointRec(mousePosition,arrowRightRec)){
+                DrawTextureEx(this->arrowBorder,{670.0f, 430.0f}, 0.0f, 5.0f, WHITE);
+            }
+            else if(CheckCollisionPointRec(mousePosition,middleFightRec)){
+                DrawTextureEx(this->middleFightBorder,{510.0f, 420.0f}, 0.0f, 5.0f, WHITE);
+            }
+        }
         DrawTextureEx(this->returnDead, {50.0f, 550.0f}, 0.0f, 5.0f, WHITE);
         DrawTextureEx(this->chooseTargetBoomerangUI, {50.0f, 600.0f}, 0.0f, 5.0f, WHITE);
         if(abilityClicked == 0){
@@ -673,7 +670,7 @@ void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites,
 }
 
 void BattleUI::DrawWeakPoints(const std::vector<Texture2D>& weakPointSprites,const Vector2& targetArrowPosition){
-    if(this->selectedWeapon == WeaponSelection::ChooseTargetPistol || this->selectedWeapon == WeaponSelection::ChooseTargetBoomerang){
+    if(this->currentFightState == FightState::None && (this->selectedWeapon == WeaponSelection::ChooseTargetPistol || this->selectedWeapon == WeaponSelection::ChooseTargetBoomerang)){
         if(this->selectedTarget == -1){
             DrawTextureEx(weakPointSprites[0], {350.0f, 130.0f}, 0.0f, 8.0f, WHITE);
         }
