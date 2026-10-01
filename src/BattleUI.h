@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include "Pistol.h"
 #include "Boomerang.h"
+#include "Monster.h"
 
 enum class WeaponSelection{
     None,
@@ -112,7 +113,7 @@ class BattleUI{
     void DrawCraftingNumber(int number, float& x, float y, float scale);
     void DrawMonsterUI();
     void DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites, const std::vector<Texture2D>& boomerangBackSprites);
-    void DrawWeakPoints(const std::vector<Texture2D>& weakPointSprites,const Vector2& targetArrowPosition);
+    void DrawWeakPoints(const std::vector<WeakPoints>& weakPoints,const Vector2& targetArrowPosition);
 
     void StartFight();
     void CheckFirst(float pistolRange, float pistolSpeed, float boomerangRange, float boomerangSpeed,    float monsterRange, float monsterSpeed);

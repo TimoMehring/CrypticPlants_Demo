@@ -669,13 +669,13 @@ void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites,
     }
 }
 
-void BattleUI::DrawWeakPoints(const std::vector<Texture2D>& weakPointSprites,const Vector2& targetArrowPosition){
+void BattleUI::DrawWeakPoints(const std::vector<WeakPoints>& weakPoints,const Vector2& targetArrowPosition){
     if(this->currentFightState == FightState::None && (this->selectedWeapon == WeaponSelection::ChooseTargetPistol || this->selectedWeapon == WeaponSelection::ChooseTargetBoomerang)){
         if(this->selectedTarget == -1){
-            DrawTextureEx(weakPointSprites[0], {350.0f, 130.0f}, 0.0f, 8.0f, WHITE);
+            DrawTextureEx(weakPoints[0].sprite, {350.0f, 130.0f}, 0.0f, 8.0f, WHITE);
         }
         else if(this->selectedTarget == 1){
-            DrawTextureEx(weakPointSprites[1], {350.0f, 130.0f}, 0.0f, 8.0f, WHITE);
+            DrawTextureEx(weakPoints[1].sprite, {350.0f, 130.0f}, 0.0f, 8.0f, WHITE);
         }
         else if(this->selectedTarget == 0){
             DrawTextureEx(this->targetArrow, targetArrowPosition, 0.0f, 8.0f, WHITE);
@@ -691,7 +691,7 @@ void BattleUI::CheckFirst(float pistolRange, float pistolSpeed, float boomerangR
     float playerInitiative = 0.0f;
     float monsterInitiative = (monsterSpeed * 2.0f) + monsterRange;
 
-    if(this->selectedWeapon == WeaponSelection::ChooseAttackPistol){
+    if(this->selectedWeapon == WeaponSelection::ChooseTargetPistol){
         playerInitiative = (pistolSpeed * 2.0f) + pistolRange;
     }
     else if(this->selectedWeapon == WeaponSelection::ChooseTargetBoomerang){

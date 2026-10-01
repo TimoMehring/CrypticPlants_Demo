@@ -9,8 +9,8 @@ Battle::Battle(){
 }
 
 void Battle::LoadMonsterData(){
-    monsterData.push_back({"Plant001", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant001_front.png", "assets/MonsterSprites/plant001_back.png", {"assets/WeakPoints/plant001MinusOne.png", "assets/WeakPoints/plant001PlusOne.png"},{350.0f, 50.0f}});
-    monsterData.push_back({"Plant002", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant002_front.png", "assets/MonsterSprites/plant002_back.png", {"assets/WeakPoints/plant001MinusOne.png", "assets/WeakPoints/plant001PlusOne.png"},{350.0f, 50.0f}});
+    monsterData.push_back({"Plant001", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant001_front.png", "assets/MonsterSprites/plant001_back.png", {{"assets/WeakPoints/plant001MinusOne.png", 20.0f}, {"assets/WeakPoints/plant001PlusOne.png", 20.0f}}, {350.0f, 50.0f}});
+    monsterData.push_back({"Plant002", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant002_front.png", "assets/MonsterSprites/plant002_back.png", {{"assets/WeakPoints/plant001MinusOne.png", 20.0f}, {"assets/WeakPoints/plant001PlusOne.png", 20.0f}}, {350.0f, 50.0f}});
 }
 
 void Battle::StartTestEncounter(){
@@ -23,7 +23,7 @@ void Battle::StartTestEncounter(){
 
 
     MonsterData& data = monsterData[randomIndex];
-    currentMonster = new Monster(data.name, data.range, data.speed, data.health, data.resistance, data.attack, data.frontSpritePath, data.backSpritePath, data.weakPointSpritePaths, data.targetArrowPosition);
+    currentMonster = new Monster(data.name, data.range, data.speed, data.health, data.resistance, data.attack, data.frontSpritePath, data.backSpritePath, data.weakPointData, data.targetArrowPosition);
 }
 
 void Battle::Update(){
@@ -42,12 +42,13 @@ void Battle::Draw(){
     battleUI.DrawChooseTarget(this->pistol.GetAbilityBackSprite(), this->boomerang.GetAbilityBackSprite());
     battleUI.DrawPlayerUI(this->player.GetCurrentHealth(), this->player.GetMaxHealth(), this->player.GetLevel(), this->player.GetCurrentXp(), this->player.GetMaxXP());
     //battleUI.UpdateFight(this->pistol.GetRange(), this->pistol.GetSpeed(), this->boomerang.GetRange(), this->boomerang.GetSpeed(), this->currentMonster->GetRange(), this->currentMonster->GetSpeed());
-    battleUI.DrawChooseTarget(this->pistol.GetAbilityBackSprite(), this->boomerang.GetAbilityBackSprite());
+    
     if(currentMonster != nullptr){
-        currentMonster->DrawFront({350.0f, 130.0f}, 8.0f);
+        this->currentMonster->DrawFront({350.0f, 130.0f}, 8.0f);
+
+        this->battleUI.DrawWeakPoints(this->currentMonster->GetWeakPoints(), this->currentMonster->GetTargetArrowPosition());
     }
     
-    this->battleUI.DrawWeakPoints(this->currentMonster->GetWeakPointSprites(), this->currentMonster->GetTargetArrowPosition());
 }
 
 void Battle::Unload(){

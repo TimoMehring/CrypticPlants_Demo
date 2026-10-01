@@ -1,6 +1,6 @@
 #include "Monster.h"
 
-Monster::Monster(const std::string& name, float range, float speed, float health, float resistance, float attack, const char* frontSpritePath, const char* backSpritePath, const std::vector<const char*>& weakPointSpritePaths,const Vector2& targetArrowPosition){
+Monster::Monster(const std::string& name, float range, float speed, float health, float resistance, float attack, const char* frontSpritePath, const char* backSpritePath, const std::vector<WeakPointData>& weakPointData,const Vector2& targetArrowPosition){
     this->name = name;
 
     this->range = range;
@@ -11,9 +11,14 @@ Monster::Monster(const std::string& name, float range, float speed, float health
     
     frontSprite = LoadTexture(frontSpritePath);
     backSprite = LoadTexture(backSpritePath);
+    
+    for(const WeakPointData& data : weakPointData){
+        WeakPoints weakPoint;
 
-    for(const char* path : weakPointSpritePaths){
-        this->weakPointSprites.push_back(LoadTexture(path));
+        weakPoint.sprite = LoadTexture(data.spritePath);
+        weakPoint.maxHealth = data.maxHealth;
+        weakPoint.currentHealth = data.maxHealth;
+        this->weakPoints.push_back(weakPoint);
     }
     this->targetArrowPosition = targetArrowPosition;
 }
@@ -22,8 +27,8 @@ void Monster::DrawFront(Vector2 position, float scale){
     DrawTextureEx(this->frontSprite, position, 0.0f, scale, WHITE);
 }
 
-const std::vector<Texture2D>& Monster::GetWeakPointSprites() const{
-    return this->weakPointSprites;
+const std::vector<WeakPoints>& Monster::GetWeakPoints() const{
+    return this->weakPoints;
 }
 
 const Vector2& Monster::GetTargetArrowPosition() const{
@@ -41,8 +46,8 @@ float Monster::GetSpeed() const{
 void Monster::Unload(){
     UnloadTexture(this->frontSprite);
     UnloadTexture(this->backSprite);
-
-    for(Texture2D& weakPointSprite : this->weakPointSprites){
-        UnloadTexture(weakPointSprite);
+    
+    for(WeakPoints& weakPoint : this->weakPoints){
+        UnloadTexture(weakPoint.sprite);
     }
 }
