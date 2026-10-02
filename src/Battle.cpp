@@ -29,6 +29,7 @@ void Battle::StartTestEncounter(){
 void Battle::Update(){
     battleUI.UpdateWeaponSelection();
     battleUI.UpdateFight(this->pistol.GetRange(), this->pistol.GetSpeed(), this->boomerang.GetRange(), this->boomerang.GetSpeed(), this->currentMonster->GetRange(), this->currentMonster->GetSpeed());
+    // ENCOUNTER SAMPLE TEST
     if(IsKeyPressed(KEY_ENTER)){
         StartTestEncounter();
     }

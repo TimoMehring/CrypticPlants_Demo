@@ -43,6 +43,18 @@ float Monster::GetSpeed() const{
     return this->speed;
 }
 
+float Monster::GetWeakPointHealth(int index) const{
+    return this->weakPoints[index].currentHealth;
+}
+
+void Monster::DamageWeakPoint(int index, float damage){
+    this->weakPoints[index].currentHealth -= damage;
+
+    if(this->weakPoints[index].currentHealth < 0.0f){
+        this->weakPoints[index].currentHealth = 0.0f;
+    }
+}
+
 void Monster::Unload(){
     UnloadTexture(this->frontSprite);
     UnloadTexture(this->backSprite);

@@ -59,6 +59,8 @@ class Monster{
 
     float GetRange() const;
     float GetSpeed() const;
+    float GetWeakPointHealth(int index) const;
+    void DamageWeakPoint(int index, float damage);
 
     void Unload();
 };
