@@ -72,6 +72,8 @@ class BattleUI{
     Texture2D targetArrow;
     FightState currentFightState = FightState::None;
 
+    bool playerAttackRequested = false;
+
     // Numbers
     Texture2D numberOne;
     Texture2D numberTwo;
@@ -122,6 +124,9 @@ class BattleUI{
     void EnemySecond();
     void PlayerSecond();
     void UpdateFight(float pistolRange, float pistolSpeed, float boomerangRange, float boomerangSpeed,    float monsterRange, float monsterSpeed);
+    bool ConsumePlayerAttackRequest();
+
+    int GetSelectedTarget() const;
     void Unload();
 
 };

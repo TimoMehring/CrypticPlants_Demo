@@ -26,10 +26,49 @@ void Battle::StartTestEncounter(){
     currentMonster = new Monster(data.name, data.range, data.speed, data.health, data.resistance, data.attack, data.frontSpritePath, data.backSpritePath, data.weakPointData, data.targetArrowPosition);
 }
 
+/* void Battle::DamageSelectedWeakPoint(float damage){
+    if(this->currentMonster == nullptr){
+        return;
+    }
+
+    int selectedTarget = this->battleUI.GetSelectedTarget();
+
+    if(selectedTarget == -1){
+        this->currentMonster->DamageWeakPoint(0, damage);
+    }
+    else if(selectedTarget == 1){
+        this->currentMonster->DamageWeakPoint(1, damage);
+    }
+} */
+
+void Battle::DamageSelectedWeakPoint(float damage){
+    if(this->currentMonster == nullptr){
+        return;
+    }
+
+    int selectedTarget = this->battleUI.GetSelectedTarget();
+
+    if(selectedTarget == -1){
+        this->currentMonster->DamageWeakPoint(0, damage);
+
+        TraceLog(LOG_INFO,"Left WeakPoint HP: %.1f",this->currentMonster->GetWeakPointHealth(0));
+    }
+    else if(selectedTarget == 1){
+        this->currentMonster->DamageWeakPoint(1, damage);
+
+        TraceLog(
+            LOG_INFO,"Right WeakPoint HP: %.1f",this->currentMonster->GetWeakPointHealth(1));
+    }
+}
+
 void Battle::Update(){
     battleUI.UpdateWeaponSelection();
     battleUI.UpdateFight(this->pistol.GetRange(), this->pistol.GetSpeed(), this->boomerang.GetRange(), this->boomerang.GetSpeed(), this->currentMonster->GetRange(), this->currentMonster->GetSpeed());
-    // ENCOUNTER SAMPLE TEST
+    
+    if(this->battleUI.ConsumePlayerAttackRequest()){
+        this->DamageSelectedWeakPoint(5.0f);
+    }
+        // ENCOUNTER SAMPLE TEST
     if(IsKeyPressed(KEY_ENTER)){
         StartTestEncounter();
     }

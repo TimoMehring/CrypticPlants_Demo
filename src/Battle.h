@@ -26,6 +26,7 @@ class Battle{
     Monster* currentMonster = nullptr;
 
     void LoadMonsterData();
+    void DamageSelectedWeakPoint(float damage);
 
     public:
     Battle();
