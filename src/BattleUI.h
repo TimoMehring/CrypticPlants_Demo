@@ -106,7 +106,7 @@ class BattleUI{
     public:
     BattleUI();
 
-    void UpdateWeaponSelection();
+    void UpdateWeaponSelection(bool leftWeakPointAlive, bool rightWeakPointAlive);
     void DrawWeaponSelection();
 
     void LoadPistolAbilityIcons(const std::vector<PistolAbility>& abilities);

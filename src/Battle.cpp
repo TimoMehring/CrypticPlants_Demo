@@ -62,7 +62,7 @@ void Battle::DamageSelectedWeakPoint(float damage){
 }
 
 void Battle::Update(){
-    battleUI.UpdateWeaponSelection();
+    battleUI.UpdateWeaponSelection(this->currentMonster->IsWeakPointAlive(0),this->currentMonster->IsWeakPointAlive(1));
     battleUI.UpdateFight(this->pistol.GetRange(), this->pistol.GetSpeed(), this->boomerang.GetRange(), this->boomerang.GetSpeed(), this->currentMonster->GetRange(), this->currentMonster->GetSpeed());
     
     if(this->battleUI.ConsumePlayerAttackRequest()){

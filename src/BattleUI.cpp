@@ -67,7 +67,7 @@ BattleUI::BattleUI(){
 
 }
 
-void BattleUI::UpdateWeaponSelection(){
+void BattleUI::UpdateWeaponSelection(bool leftWeakPointAlive, bool rightWeakPointAlive){
     float scale = 5.0f;
     float halfWidth = static_cast<float>(noWeaponSelectedYet.width) / 2.0f;
     Rectangle clickPistol = {50.0f, 600.0f, halfWidth*scale, static_cast<float>(noWeaponSelectedYet.height)*scale};
@@ -187,19 +187,71 @@ void BattleUI::UpdateWeaponSelection(){
             if(this->currentFightState == FightState::None){
                 if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
                     if(CheckCollisionPointRec(mousePosition, arrowLeftRec)){
+                        // Both WeakPoints alive
+                        if(leftWeakPointAlive && rightWeakPointAlive){
                         this->selectedTarget--;
                         // Go circle if limit is passed
                         if(selectedTarget <= -2){
                             selectedTarget = 1;
                         }
                     }
-                    else if(CheckCollisionPointRec(mousePosition, arrowRightRec)){
-                        this->selectedTarget++;
-                        // Go circle if limit is passed
-                        if(selectedTarget >= 2){
-                            selectedTarget = -1;
+                    // Right WeakPoint Dead
+                    else if(leftWeakPointAlive && !rightWeakPointAlive){
+                        if(this->selectedTarget == 0){
+                            this->selectedTarget = -1;
+                        }
+                        else{
+                            this->selectedTarget = 0;
                         }
                     }
+                    // Left WeakPoint Dead
+                    else if(!leftWeakPointAlive && rightWeakPointAlive){
+                        if(this->selectedTarget == 0){
+                            this->selectedTarget = 1;
+                        }
+                        else{
+                            this->selectedTarget = 0;
+                        }
+                    }
+                    // Both WeakPoints Dead
+                    else{
+                        this->selectedTarget = 0;
+                    }
+                    }
+                    // Right Arrow
+                    else if(CheckCollisionPointRec(mousePosition, arrowRightRec)){
+                        // Both WeakPoints Alive
+                        if(leftWeakPointAlive && rightWeakPointAlive){
+                            this->selectedTarget++;
+                            // Go circle if limit is passed
+                            if(selectedTarget >= 2){
+                                selectedTarget = -1;
+                            }
+                        }
+                        // Right WeakPoint Dead
+                        else if(leftWeakPointAlive && !rightWeakPointAlive){
+                            if(this->selectedTarget == 0){
+                                this->selectedTarget = -1;
+                            }
+                            else{
+                                this->selectedTarget = 0;
+                            }  
+                        }
+                        // Left WeakPoint Dead
+                        else if(!leftWeakPointAlive && rightWeakPointAlive){
+                             if(this->selectedTarget == 0){
+                                this->selectedTarget = 1;
+                             }
+                             else{
+                                this->selectedTarget = 0;
+                             }
+                        }
+                        // Both WeakPoints Dead
+                        else{
+                             this->selectedTarget = 0;
+                        }
+                    }
+                    // Fight Button
                     else if(CheckCollisionPointRec(mousePosition, middleFightRec)){
                         this->StartFight();
                     }
