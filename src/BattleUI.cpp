@@ -671,10 +671,10 @@ void BattleUI::DrawChooseTarget(const std::vector<Texture2D>& pistolBackSprites,
 
 void BattleUI::DrawWeakPoints(const std::vector<WeakPoints>& weakPoints,const Vector2& targetArrowPosition){
     if(this->selectedWeapon == WeaponSelection::ChooseTargetPistol || this->selectedWeapon == WeaponSelection::ChooseTargetBoomerang){
-        if(this->selectedTarget == -1){
+        if(this->selectedTarget == -1 && weakPoints[0].currentHealth > 0.0f){
             DrawTextureEx(weakPoints[0].sprite, {350.0f, 130.0f}, 0.0f, 8.0f, WHITE);
         }
-        else if(this->selectedTarget == 1){
+        else if(this->selectedTarget == 1 && weakPoints[1].currentHealth > 0.0f){
             DrawTextureEx(weakPoints[1].sprite, {350.0f, 130.0f}, 0.0f, 8.0f, WHITE);
         }
         else if(this->selectedTarget == 0){

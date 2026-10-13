@@ -48,12 +48,12 @@ void Battle::DamageSelectedWeakPoint(float damage){
 
     int selectedTarget = this->battleUI.GetSelectedTarget();
 
-    if(selectedTarget == -1){
+    if(selectedTarget == -1  && this->currentMonster->IsWeakPointAlive(0)){
         this->currentMonster->DamageWeakPoint(0, damage);
 
         TraceLog(LOG_INFO,"Left WeakPoint HP: %.1f",this->currentMonster->GetWeakPointHealth(0));
     }
-    else if(selectedTarget == 1){
+    else if(selectedTarget == 1 && this->currentMonster->IsWeakPointAlive(1)){
         this->currentMonster->DamageWeakPoint(1, damage);
 
         TraceLog(

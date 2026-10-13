@@ -61,6 +61,7 @@ class Monster{
     float GetSpeed() const;
     float GetWeakPointHealth(int index) const;
     void DamageWeakPoint(int index, float damage);
+    bool IsWeakPointAlive(int index) const;
 
     void Unload();
 };
