@@ -20,7 +20,10 @@ enum class FightState{
     EnemyFirst,
     PlayerFirst,
     EnemySecond,
-    PlayerSecond
+    PlayerSecond,
+    EnemyHpZero,
+    PlayerHpZero,
+    XpGain
 };
 
 class BattleUI{
