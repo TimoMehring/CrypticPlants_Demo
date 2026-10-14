@@ -9,7 +9,7 @@ Battle::Battle(){
 }
 
 void Battle::LoadMonsterData(){
-    monsterData.push_back({"Plant001", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant001_front.png", "assets/MonsterSprites/plant001_back.png", {{"assets/WeakPoints/plant001MinusOne.png", 20.0f}, {"assets/WeakPoints/plant001PlusOne.png", 20.0f}}, {350.0f, 50.0f}});
+    monsterData.push_back({"Plant001", 0.0f, 0.0f, 50.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant001_front.png", "assets/MonsterSprites/plant001_back.png", {{"assets/WeakPoints/plant001MinusOne.png", 20.0f}, {"assets/WeakPoints/plant001PlusOne.png", 20.0f}}, {350.0f, 50.0f}});
     monsterData.push_back({"Plant002", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, "assets/MonsterSprites/plant002_front.png", "assets/MonsterSprites/plant002_back.png", {{"assets/WeakPoints/plant001MinusOne.png", 20.0f}, {"assets/WeakPoints/plant001PlusOne.png", 20.0f}}, {350.0f, 50.0f}});
 }
 
@@ -41,7 +41,7 @@ void Battle::StartTestEncounter(){
     }
 } */
 
-void Battle::DamageSelectedWeakPoint(float damage){
+void Battle::DamageSelectedTarget(float damage){
     if(this->currentMonster == nullptr){
         return;
     }
@@ -52,6 +52,10 @@ void Battle::DamageSelectedWeakPoint(float damage){
         this->currentMonster->DamageWeakPoint(0, damage);
 
         TraceLog(LOG_INFO,"Left WeakPoint HP: %.1f",this->currentMonster->GetWeakPointHealth(0));
+    }
+    else if(selectedTarget == 0){
+        this->currentMonster->DamageHealth(damage);
+        TraceLog(LOG_INFO, "Monster HP: %.1f", this->currentMonster->GetHealth());
     }
     else if(selectedTarget == 1 && this->currentMonster->IsWeakPointAlive(1)){
         this->currentMonster->DamageWeakPoint(1, damage);
@@ -66,7 +70,7 @@ void Battle::Update(){
     battleUI.UpdateFight(this->pistol.GetRange(), this->pistol.GetSpeed(), this->boomerang.GetRange(), this->boomerang.GetSpeed(), this->currentMonster->GetRange(), this->currentMonster->GetSpeed());
     
     if(this->battleUI.ConsumePlayerAttackRequest()){
-        this->DamageSelectedWeakPoint(5.0f);
+        this->DamageSelectedTarget(5.0f);
     }
         // ENCOUNTER SAMPLE TEST
     if(IsKeyPressed(KEY_ENTER)){

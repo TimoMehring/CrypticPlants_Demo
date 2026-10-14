@@ -63,6 +63,18 @@ bool Monster::IsWeakPointAlive(int index) const{
     return this->weakPoints[index].currentHealth > 0.0f;
 }
 
+void Monster::DamageHealth(float damage){
+    this->health -= damage;
+
+    if(this->health < 0.0f){
+        this->health = 0.0f;
+    }
+}
+
+float Monster::GetHealth() const{
+    return this->health;
+}
+
 void Monster::Unload(){
     UnloadTexture(this->frontSprite);
     UnloadTexture(this->backSprite);
