@@ -71,6 +71,10 @@ void Battle::Update(){
     
     if(this->battleUI.ConsumePlayerAttackRequest()){
         this->DamageSelectedTarget(5.0f);
+
+        if(this->currentMonster->GetHealth() <= 0.0f){
+            this->battleUI.SetEnemyHpZero();
+        }
     }
         // ENCOUNTER SAMPLE TEST
     if(IsKeyPressed(KEY_ENTER)){

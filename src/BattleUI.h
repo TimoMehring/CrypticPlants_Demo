@@ -128,6 +128,7 @@ class BattleUI{
     void PlayerSecond();
     void UpdateFight(float pistolRange, float pistolSpeed, float boomerangRange, float boomerangSpeed,    float monsterRange, float monsterSpeed);
     bool ConsumePlayerAttackRequest();
+    void SetEnemyHpZero();
 
     int GetSelectedTarget() const;
     void Unload();

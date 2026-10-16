@@ -806,6 +806,9 @@ void BattleUI::UpdateFight(float pistolRange, float pistolSpeed, float boomerang
             this->PlayerSecond();
         }
         break;
+        case FightState::EnemyHpZero:{
+            break;
+        }
     }
 
 }
@@ -817,6 +820,10 @@ bool BattleUI::ConsumePlayerAttackRequest(){
     }
 
     return false;
+}
+
+void BattleUI::SetEnemyHpZero(){
+    this->currentFightState = FightState::EnemyHpZero;
 }
 
 int BattleUI::GetSelectedTarget() const{
